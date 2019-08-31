@@ -30,7 +30,10 @@ ALLOWED_HOSTS = []
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
-    'app',
+
+    'public',
+    'profile',
+
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'zo.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zo-sports',
+        'USER': 'postgres',
+        'PASSWORD': 'hecate13',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -110,4 +117,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Email 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.zo-sports.com'
+EMAIL_HOST_USER = 'info@zo-sports.com'
+EMAIL_HOST_PASSWORD = 'Vetinari13'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True

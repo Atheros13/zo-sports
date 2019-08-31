@@ -1,9 +1,28 @@
-<html>
-<head><title></title></head>
+{% extends "public/layout.html" %}
 
-<body>
+{% block content %}
 
-{{ content }}
+<div class="jumbotron">
+    <h1>ZO-SPORTS</h1>
+    <p class="lead">ZO-SPORTS is a website that helps NZ organisations 
+    to more easily organise and run sports tournaments, especially Athletics, Swimming, and Cross Country.</p>
+    <p>Similar sports tournaments can be run using the same templates, and we intend to continue adding 
+    new sports templates.</p>
+</div>
 
-</body>
-</html>
+<div class="row page-content">
+    <div class="col-md-4">
+        <h2>Free</h2>
+        <p>To any NZ school, club, or sporting organisation.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Easy to use</h2>
+        <p>Quick to setup and simple to customise.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>NZ Made</h2>
+        <p>By a teacher with over 35 years of teaching experience.</p>
+    </div>
+</div>
+
+{% endblock %}

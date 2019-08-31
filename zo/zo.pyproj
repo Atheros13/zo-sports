@@ -4,6 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>zo</Name>
     <RootNamespace>zo</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,15 +31,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\forms.py" />
-    <Compile Include="app\models.py" />
-    <Compile Include="app\tests.py" />
-    <Compile Include="app\views.py" />
-    <Compile Include="app\__init__.py" />
-    <Compile Include="app\migrations\__init__.py" />
     <Compile Include="manage.py" />
+    <Compile Include="profile\admin.py" />
+    <Compile Include="profile\apps.py" />
+    <Compile Include="profile\migrations\__init__.py" />
+    <Compile Include="profile\models\base.py" />
+    <Compile Include="profile\models\profile.py" />
+    <Compile Include="profile\models\__init__.py" />
+    <Compile Include="profile\tests.py" />
+    <Compile Include="profile\views.py" />
+    <Compile Include="profile\__init__.py" />
     <Compile Include="public\admin.py" />
     <Compile Include="public\apps.py" />
+    <Compile Include="public\forms.py" />
     <Compile Include="public\migrations\__init__.py" />
     <Compile Include="public\models.py" />
     <Compile Include="public\tests.py" />
@@ -50,42 +55,54 @@
     <Compile Include="zo\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\" />
-    <Folder Include="app\migrations\" />
-    <Folder Include="app\static\" />
-    <Folder Include="app\static\app\" />
-    <Folder Include="app\static\app\content\" />
-    <Folder Include="app\static\app\fonts\" />
-    <Folder Include="app\static\app\scripts\" />
-    <Folder Include="app\templates\" />
-    <Folder Include="app\templates\app\" />
+    <Folder Include="profile\" />
+    <Folder Include="profile\migrations\" />
+    <Folder Include="profile\migrations\__pycache__\" />
+    <Folder Include="profile\models\" />
+    <Folder Include="profile\models\__pycache__\" />
+    <Folder Include="profile\templates\" />
+    <Folder Include="profile\templates\profile\" />
+    <Folder Include="profile\__pycache__\" />
     <Folder Include="public\" />
     <Folder Include="public\migrations\" />
+    <Folder Include="public\migrations\__pycache__\" />
     <Folder Include="public\static\" />
     <Folder Include="public\static\public\" />
     <Folder Include="public\static\public\content\" />
+    <Folder Include="public\static\public\content\images\" />
     <Folder Include="public\static\public\fonts\" />
     <Folder Include="public\static\public\scripts\" />
     <Folder Include="public\templates\" />
     <Folder Include="public\templates\public\" />
+    <Folder Include="public\__pycache__\" />
     <Folder Include="zo\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="profile\migrations\__pycache__\0001_initial.cpython-37.pyc" />
+    <Content Include="profile\migrations\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="profile\models\__pycache__\base.cpython-37.pyc" />
+    <Content Include="profile\models\__pycache__\profile.cpython-37.pyc" />
+    <Content Include="profile\models\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="profile\templates\profile\index.html" />
+    <Content Include="profile\__pycache__\admin.cpython-37.pyc" />
+    <Content Include="profile\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="public\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="public\static\public\content\bootstrap.css" />
     <Content Include="public\static\public\content\bootstrap.min.css" />
+    <Content Include="public\static\public\content\images\bg_grass_track.jpg" />
+    <Content Include="public\static\public\content\public.css" />
     <Content Include="public\static\public\content\site.css" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="public\static\public\scripts\_references.js" />
     <Content Include="public\static\public\scripts\bootstrap.js" />
     <Content Include="public\static\public\scripts\bootstrap.min.js" />
-    <None Include="public\static\public\scripts\jquery.validate-vsdoc.js" />
     <None Include="public\static\public\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="public\static\public\scripts\jquery-1.10.2.js" />
     <Content Include="public\static\public\scripts\jquery-1.10.2.min.js" />
     <Content Include="public\static\public\scripts\jquery-1.10.2.min.map" />
+    <None Include="public\static\public\scripts\jquery.validate-vsdoc.js" />
     <Content Include="public\static\public\scripts\jquery.validate.js" />
     <Content Include="public\static\public\scripts\jquery.validate.min.js" />
     <Content Include="public\static\public\scripts\jquery.validate.unobtrusive.js" />
@@ -93,41 +110,36 @@
     <Content Include="public\static\public\scripts\modernizr-2.6.2.js" />
     <Content Include="public\static\public\scripts\respond.js" />
     <Content Include="public\static\public\scripts\respond.min.js" />
+    <None Include="public\static\public\scripts\_references.js" />
+    <Content Include="public\templates\public\about.html" />
+    <Content Include="public\templates\public\contact.html" />
+    <Content Include="public\templates\public\contact_success.html" />
     <Content Include="public\templates\public\index.html" />
+    <Content Include="public\templates\public\layout.html" />
+    <Content Include="public\templates\public\login.html" />
+    <Content Include="public\templates\public\loginpartial.html" />
+    <Content Include="public\__pycache__\admin.cpython-37.pyc" />
+    <Content Include="public\__pycache__\forms.cpython-37.pyc" />
+    <Content Include="public\__pycache__\models.cpython-37.pyc" />
+    <Content Include="public\__pycache__\views.cpython-37.pyc" />
+    <Content Include="public\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="requirements.txt" />
-    <Content Include="app\static\app\content\bootstrap.css" />
-    <Content Include="app\static\app\content\bootstrap.min.css" />
-    <Content Include="app\static\app\content\site.css" />
-    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="app\static\app\scripts\bootstrap.js" />
-    <Content Include="app\static\app\scripts\bootstrap.min.js" />
-    <Content Include="app\static\app\scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="app\static\app\scripts\jquery-1.10.2.js" />
-    <Content Include="app\static\app\scripts\jquery-1.10.2.min.js" />
-    <Content Include="app\static\app\scripts\jquery-1.10.2.min.map" />
-    <Content Include="app\static\app\scripts\jquery.validate-vsdoc.js" />
-    <Content Include="app\static\app\scripts\jquery.validate.js" />
-    <Content Include="app\static\app\scripts\jquery.validate.min.js" />
-    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="app\static\app\scripts\modernizr-2.6.2.js" />
-    <Content Include="app\static\app\scripts\respond.js" />
-    <Content Include="app\static\app\scripts\respond.min.js" />
-    <Content Include="app\static\app\scripts\_references.js" />
-    <Content Include="app\templates\app\about.html" />
-    <Content Include="app\templates\app\contact.html" />
-    <Content Include="app\templates\app\index.html" />
-    <Content Include="app\templates\app\layout.html" />
-    <Content Include="app\templates\app\login.html" />
-    <Content Include="app\templates\app\loginpartial.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">
       <SubType>WebBrowser</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.7</Version>
+      <Description>env (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

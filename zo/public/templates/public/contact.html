@@ -1,0 +1,22 @@
+{% extends "public/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+<p>Please use the following form to contact the team at ZO-SPORTS. If you would like to 
+    request the download link to the current desktop version of ZO-SPORTS, select the 
+    Request Prototype field.</p>
+<hr />
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button type="submit">Send</button>
+    </div>
+</form>
+
+
+
+{% endblock %}
