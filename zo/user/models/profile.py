@@ -1,14 +1,18 @@
+from django.conf import settings
 from django.db import models
 
-from profile.models.base import *
+from user.models.base import *
 
 class Profile(models.Model):
 
-    #user = 
     person = models.ForeignKey('Person', null=True, 
                                on_delete=models.CASCADE)
     contact_details = models.ForeignKey(ContactDetails, null=True, 
                                         on_delete=models.CASCADE)
+
+    def __str__(self):
+
+        return self.person
 
 class PersonGender(models.Model):
 
@@ -27,6 +31,9 @@ class PersonName(models.Model):
     birth_name = models.ForeignKey(FullName, related_name='birth_name',
                                    on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 class Person(models.Model):
 
     '''
@@ -35,4 +42,7 @@ class Person(models.Model):
     name = models.ForeignKey(PersonName, on_delete=models.CASCADE)
     gender = models.ForeignKey(PersonGender, null=True, on_delete=models.CASCADE)
     dob = models.DateField(verbose_name='Date of Birth', null=True)
+
+    def __str__(self):
+        return self.name
 

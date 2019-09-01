@@ -32,15 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="manage.py" />
-    <Compile Include="profile\admin.py" />
-    <Compile Include="profile\apps.py" />
-    <Compile Include="profile\migrations\__init__.py" />
-    <Compile Include="profile\models\base.py" />
-    <Compile Include="profile\models\profile.py" />
-    <Compile Include="profile\models\__init__.py" />
-    <Compile Include="profile\tests.py" />
-    <Compile Include="profile\views.py" />
-    <Compile Include="profile\__init__.py" />
+    <Compile Include="user\admin.py" />
+    <Compile Include="user\apps.py" />
+    <Compile Include="user\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="user\migrations\__init__.py" />
+    <Compile Include="user\models\user.py" />
+    <Compile Include="user\models\base.py" />
+    <Compile Include="user\models\profile.py" />
+    <Compile Include="user\models\__init__.py" />
+    <Compile Include="user\tests.py" />
+    <Compile Include="user\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="user\views.py" />
+    <Compile Include="user\__init__.py" />
     <Compile Include="public\admin.py" />
     <Compile Include="public\apps.py" />
     <Compile Include="public\forms.py" />
@@ -49,20 +56,20 @@
     <Compile Include="public\tests.py" />
     <Compile Include="public\views.py" />
     <Compile Include="public\__init__.py" />
+    <Compile Include="zo\urls.py" />
     <Compile Include="zo\__init__.py" />
     <Compile Include="zo\settings.py" />
-    <Compile Include="zo\urls.py" />
     <Compile Include="zo\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="profile\" />
-    <Folder Include="profile\migrations\" />
-    <Folder Include="profile\migrations\__pycache__\" />
-    <Folder Include="profile\models\" />
-    <Folder Include="profile\models\__pycache__\" />
-    <Folder Include="profile\templates\" />
-    <Folder Include="profile\templates\profile\" />
-    <Folder Include="profile\__pycache__\" />
+    <Folder Include="user\" />
+    <Folder Include="user\migrations\" />
+    <Folder Include="user\migrations\__pycache__\" />
+    <Folder Include="user\models\" />
+    <Folder Include="user\models\__pycache__\" />
+    <Folder Include="user\templates\" />
+    <Folder Include="user\templates\user\" />
+    <Folder Include="user\__pycache__\" />
     <Folder Include="public\" />
     <Folder Include="public\migrations\" />
     <Folder Include="public\migrations\__pycache__\" />
@@ -78,14 +85,17 @@
     <Folder Include="zo\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="profile\migrations\__pycache__\0001_initial.cpython-37.pyc" />
-    <Content Include="profile\migrations\__pycache__\__init__.cpython-37.pyc" />
-    <Content Include="profile\models\__pycache__\base.cpython-37.pyc" />
-    <Content Include="profile\models\__pycache__\profile.cpython-37.pyc" />
-    <Content Include="profile\models\__pycache__\__init__.cpython-37.pyc" />
-    <Content Include="profile\templates\profile\index.html" />
-    <Content Include="profile\__pycache__\admin.cpython-37.pyc" />
-    <Content Include="profile\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
+    <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="user\models\__pycache__\base.cpython-37.pyc" />
+    <Content Include="user\models\__pycache__\profile.cpython-37.pyc" />
+    <Content Include="user\models\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="user\templates\user\settings.html" />
+    <Content Include="user\templates\user\profile.html" />
+    <Content Include="user\templates\user\layout.html" />
+    <Content Include="user\templates\user\loginpartial.html" />
+    <Content Include="user\__pycache__\admin.cpython-37.pyc" />
+    <Content Include="user\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="public\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="public\static\public\content\bootstrap.css" />
     <Content Include="public\static\public\content\bootstrap.min.css" />

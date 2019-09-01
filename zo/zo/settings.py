@@ -31,9 +31,6 @@ ALLOWED_HOSTS = []
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
 
-    'public',
-    'profile',
-
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #
+
+    'public',
+    'user',
 ]
 
 # Middleware framework
@@ -130,3 +131,6 @@ EMAIL_HOST_USER = 'info@zo-sports.com'
 EMAIL_HOST_PASSWORD = 'Vetinari13'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
+
+# Custom User 
+AUTH_USER_MODEL = 'user.CustomUser'

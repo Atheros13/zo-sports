@@ -1,22 +1,23 @@
-"""
-Definition of urls for zo.
-"""
 
 from datetime import datetime
-from django.urls import path
+from django.urls import include, path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
-from app import forms, views
-
+from public import forms, views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('contact/', views.contact, name='contact'),
+
     path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('contact_success/', views.contact_success, name='contact_success'),
+
+    path('profile/', include('user.urls')),
+
     path('login/',
          LoginView.as_view
          (
-             template_name='app/login.html',
+             template_name='public/login.html',
              authentication_form=forms.BootstrapAuthenticationForm,
              extra_context=
              {
@@ -26,5 +27,6 @@ urlpatterns = [
          ),
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+
     path('admin/', admin.site.urls),
 ]
