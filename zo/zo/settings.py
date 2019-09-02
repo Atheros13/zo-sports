@@ -82,8 +82,8 @@ WSGI_APPLICATION = 'zo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zo-sports',
-        'USER': 'postgres',
+        'NAME': 'zosports',
+        'USER': 'atheros',
         'PASSWORD': 'hecate13',
         'HOST': 'localhost',
         'PORT': '5432',
