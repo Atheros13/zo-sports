@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'public',
     'user',
+    #'hub',
 ]
 
 # Middleware framework
