@@ -41,17 +41,20 @@ def contact(request):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
+            f = form.cleaned_data
 
-            org_type = form.cleaned_data['org_type']
-            org_name = form.cleaned_data['org_name']
-            request = form.cleaned_data['request']
-            fullname = form.cleaned_data['fullname']
-            phone = form.cleaned_data['phone']
-            message = form.cleaned_data['message']
+            org_type = f['org_type']
+            org_name = f['org_name']
+            request_prototype = f['request_prototype']
+            firstname = f['firstname']
+            surname = f['surname']
+            phone = f['phone']
+            message = f['message']
+            email = f['email']
 
-            email_message = '%s %s\n\nName: %s\nPhone: %s\nRequest: %s\n\nMessage: %s' % (org_type, org_name, fullname, phone, request, message)
-
-            email = form.cleaned_data['email']
+            email_message = '%s %s\n\nName: %s %s\nPhone: %s\nRequest: %s\n\nMessage: %s' % (org_type, org_name, firstname, surname, phone, request_prototype, message)
+            if f['request_signup'] == True:
+                email_message += '\n\n112.109.84.57:8001/user/confirm_user_signup/%s/%s/%s' % (email, firstname, surname)
 
             try:
                 send_mail('General Contact', email_message, email, ['info@zo-sports.com'])

@@ -7,12 +7,13 @@ from user.forms import *
 from user.models import *
 
 def profile_check(user):
-    ''' Checks to see if a user has a Profile(), if not
-    directs the user to the /settings page where a Profile()
-    can be set up. '''
+    ''' Checks to see if a user has a Profile(), if not or if they 
+    have a Profile() but their gender or date of birth is not included,
+    it directs the user to the /settings page where a Profile()
+    can be set up.'''
     if user.profile != None:
-        return True
-
+        if user.profile.person.gender != None or user.profile.person.dob != None:
+            return True
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(profile_check, login_url='/profile/settings/', redirect_field_name=None)
 def profile(request):
@@ -52,8 +53,9 @@ def settings(request):
 
         if all_valid:
 
-            for form in all_forms:
-                print(form.cleaned_data)
+            f = form.cleaned_data
+
+            # update 
 
     if user.profile:
         p = user.profile
@@ -69,7 +71,7 @@ def settings(request):
         person_form = PersonForm()
         address_form = AddressForm()
         contact_details_form = ContactDetailsForm(initial={'email': user.email})
-        message = 'No profile has been set up, please enter profile details below.'
+        message = 'Profile details are missing, please enter profile details below.'
 
     return render(
         request,
@@ -82,3 +84,24 @@ def settings(request):
             'contact_details_form':contact_details_form,
         }
         )
+
+def confirm_user_signup_check(user):
+    
+    ''' Checks if the user is zo-sports staff
+    '''
+    return user.is_staff
+@login_required(login_url='/login/', redirect_field_name=None)
+@user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
+def confirm_user_signup(request, email, firstname, surname):
+
+    assert isinstance(request, HttpRequest)
+
+    return render(
+        request,
+        'user/confirm_user_signup.html',
+        {
+            'title':'Signup', 'year':datetime.now().year,
+            'message':'Signup', 'email':email, 'firstname':firstname,
+            'surname':surname,
+        }
+    )

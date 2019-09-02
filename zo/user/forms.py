@@ -15,7 +15,6 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('email', 'is_staff')
 
 
-
 class FullNameForm(forms.ModelForm):
 
     class Meta:

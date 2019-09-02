@@ -25,8 +25,10 @@ class ContactForm(forms.Form):
 
     org_type = forms.ChoiceField(label='Organisation Type', choices=CHOICES_ORGANISATION_TYPE)
     org_name = forms.CharField(label="Organisation Name", max_length=50, required=True)
-    request = forms.BooleanField(label="Request Prototype", required=False)
-    fullname = forms.CharField(label="Name", max_length=50, required=True)
+    request_prototype = forms.BooleanField(label="Request Prototype", required=False)
+    firstname = forms.CharField(label="First Name", max_length=50, required=True)
+    surname = forms.CharField(label="Surname", max_length=50, required=True)
     email = forms.EmailField(label="Email Address", required=True)
     phone = forms.CharField(label="Phone Number", max_length=30)
+    request_signup = forms.BooleanField(label='Request Signup', required=False)
     message = forms.CharField(widget=forms.Textarea, required=False)

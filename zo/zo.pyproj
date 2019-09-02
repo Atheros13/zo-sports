@@ -90,6 +90,7 @@
     <Content Include="user\models\__pycache__\base.cpython-37.pyc" />
     <Content Include="user\models\__pycache__\profile.cpython-37.pyc" />
     <Content Include="user\models\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="user\templates\user\confirm_user_signup.html" />
     <Content Include="user\templates\user\settings.html" />
     <Content Include="user\templates\user\profile.html" />
     <Content Include="user\templates\user\layout.html" />
