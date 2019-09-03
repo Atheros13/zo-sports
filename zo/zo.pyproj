@@ -56,6 +56,9 @@
     <Compile Include="public\tests.py" />
     <Compile Include="public\views.py" />
     <Compile Include="public\__init__.py" />
+    <Compile Include="zo\deploy.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="zo\urls.py" />
     <Compile Include="zo\__init__.py" />
     <Compile Include="zo\settings.py" />

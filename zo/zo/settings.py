@@ -13,6 +13,17 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import posixpath
 
+## Deployment Safety Measures
+try:
+    f = open('/etc/deploy.txt', 'r').read().split('\n')
+    secretKey = f[0]
+    db_password = f[1]
+    email_password = f[2]
+    debug_state = False
+except:
+    from zo.deploy import *
+    debug_state = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +31,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1ce69271-fbb8-4827-9717-2ffbcbb87dad'
+SECRET_KEY = secretKey
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = debug_state
 
-ALLOWED_HOSTS = ['112.109.84.57']
+ALLOWED_HOSTS = ['112.109.84.57', 'localhost']
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
@@ -85,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'zosports',
         'USER': 'atheros',
-        'PASSWORD': 'hecate13',
+        'PASSWORD': db_pw, 
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -129,7 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.zo-sports.com'
 EMAIL_HOST_USER = 'info@zo-sports.com'
-EMAIL_HOST_PASSWORD = 'Vetinari13'
+EMAIL_HOST_PASSWORD = email_pw
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
