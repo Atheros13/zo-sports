@@ -15,7 +15,7 @@ def profile_check(user):
         if user.profile.person.gender != None or user.profile.person.dob != None:
             return True
 @login_required(login_url='/login/', redirect_field_name=None)
-@user_passes_test(profile_check, login_url='/profile/settings/', redirect_field_name=None)
+@user_passes_test(profile_check, login_url='/user/settings/', redirect_field_name=None)
 def profile(request):
     assert isinstance(request, HttpRequest)
     p = request.user.profile
