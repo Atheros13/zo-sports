@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'zosports',
         'USER': 'atheros',
-        'PASSWORD': db_pw, 
+        'PASSWORD': db_password, 
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -140,7 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.zo-sports.com'
 EMAIL_HOST_USER = 'info@zo-sports.com'
-EMAIL_HOST_PASSWORD = email_pw
+EMAIL_HOST_PASSWORD = email_password
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
