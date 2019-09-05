@@ -13,6 +13,7 @@ urlpatterns = [
     path('contact_success/', views.contact_success, name='contact_success'),
 
     path('user/', include('user.urls')),
+    path('hub/', include('hub.urls')),
 
     path('login/',
          LoginView.as_view

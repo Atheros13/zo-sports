@@ -11,12 +11,12 @@
 <form action="." method="post" class="form-horizontal">
 {% csrf_token %}
     {{fullname_form.as_p}}
+
     {{person_gender_form.as_p}}
+
     {{person_form.as_p}}
     <hr />
-    {{contact_details_form.as_p}}
-    <hr />
-    {{address_form.as_p}}
+    {{custom_user_form.as_p}}
     <input type="submit" value="Update Profile" class="btn btn-default" />
 </form>
 

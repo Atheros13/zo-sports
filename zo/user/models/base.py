@@ -29,6 +29,11 @@ class FullName(models.Model):
         
         return '%s %s' % (firstname, self.surname)
 
+    def name(self):
+        if self.preferred_name:
+            return self.preferred_name
+        return self.firstname
+
     def fullname(self, preferred=True):
 
         firstname = self.firstname

@@ -5,7 +5,45 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import AbstractBaseUser
 
 from user.models.base import *
-from user.models.profile import *
+
+class PersonGender(models.Model):
+
+    gender = models.ForeignKey(Gender, related_name='gender_identity',
+                               on_delete=models.CASCADE)
+    birth_gender = models.ForeignKey(Gender, related_name='birth_gender',
+                                     on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.gender.__str__()
+
+class PersonName(models.Model):
+
+    '''
+    '''
+
+    name = models.ForeignKey(FullName, related_name='current_name',
+                             on_delete=models.CASCADE)
+    birth_name = models.ForeignKey(FullName, related_name='birth_name',
+                                   on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name.__str__()
+
+class Person(models.Model):
+
+    '''
+    '''
+
+    name = models.ForeignKey(PersonName, on_delete=models.CASCADE)
+    gender = models.ForeignKey(PersonGender, null=True, on_delete=models.CASCADE)
+    dob = models.DateField(verbose_name='Date of Birth', null=True)
+
+    #memberships
+    #participations
+
+    def __str__(self):
+        return self.name.__str__()
+
 
 class CustomUserManager(BaseUserManager):
     
@@ -38,12 +76,13 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=30, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    #is_huttscience = models.BooleanField(default=False)
+    is_huttscience = models.BooleanField(default=False)
     
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True)
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, null=True)
 
     objects = CustomUserManager()
 
@@ -56,8 +95,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
 
-        if self.profile != None:
-            return self.profile
+        if self.person != None:
+            print('here')
+            return self.person.name.__str__()
         return self.email
 
     def get_full_name(self):
