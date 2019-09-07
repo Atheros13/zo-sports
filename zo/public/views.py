@@ -50,8 +50,8 @@ def contact(request):
             if contact_type == 'Signup':
                 message = f['message'].replace('/', '')
                 email_message += 'https://112.109.84.57:8000/user/confirm_user_signup'
-                email_message += '/%s/%s/%s/=%s' % (f['email'],f['firstname'],
-                                                    f['surname'], message)
+                email_message += '/%s/%s/%s/%s/=%s' % (f['email'],f['firstname'],
+                                                    f['surname'], f['phone'], message)
             else:
                 if f['message'] == '':
                         return render(
