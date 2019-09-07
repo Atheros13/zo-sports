@@ -96,7 +96,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
 
         if self.person != None:
-            print('here')
             return self.person.name.__str__()
         return self.email
 

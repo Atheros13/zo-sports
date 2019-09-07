@@ -3,11 +3,16 @@
 {% block content %}
 
 <h2>{{ title }}</h2>
-<br />
-<p>{{message}}</p>
-<br />
 <hr />
+<p>Firstname: {{firstname}}</p>
+<p>Surname: {{surname}}</p>
+<p>Email: {{email}}</p>
+{% if message != '' %}
+    <p>Message: {{message}}</p>
+{% endif %}
 
-<p>{{email}} {{firstname}} {{surname}}</p>
+<form action="" method="post">
+    <input type="submit" name="contact-submit" value="Upvote" />
+</form>
 
 {% endblock %}

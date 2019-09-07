@@ -18,17 +18,16 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 
 class ContactForm(forms.Form):
 
-    CHOICES_ORGANISATION_TYPE = [
-        ('School', 'School'), ('Club', 'Club'), 
-        ('Other Organisation','Other Organisation'),
+    CHOICES_CONTACT_TYPE = [
+        ('General', 'General'), ('Signup', 'Signup'),
+        ('Technical', 'Technical')
         ]
 
-    org_type = forms.ChoiceField(label='Organisation Type', choices=CHOICES_ORGANISATION_TYPE)
-    org_name = forms.CharField(label="Organisation Name", max_length=50, required=True)
-    request_prototype = forms.BooleanField(label="Request Prototype", required=False)
+    contact_type = forms.ChoiceField(label='Subject',
+                                   choices=CHOICES_CONTACT_TYPE,
+                                   widget=forms.RadioSelect)
     firstname = forms.CharField(label="First Name", max_length=50, required=True)
     surname = forms.CharField(label="Surname", max_length=50, required=True)
     email = forms.EmailField(label="Email Address", required=True)
-    phone = forms.CharField(label="Phone Number", max_length=30)
-    request_signup = forms.BooleanField(label='Request Signup', required=False)
-    message = forms.CharField(widget=forms.Textarea, required=False)
+    phone = forms.CharField(label="Phone Number", max_length=30, required=False)
+    message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)

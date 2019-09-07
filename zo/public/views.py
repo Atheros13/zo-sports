@@ -36,31 +36,40 @@ def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
 
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
+    if request.method == 'POST':
+
         form = ContactForm(request.POST)
+
         if form.is_valid():
+
             f = form.cleaned_data
+            contact_type = f['contact_type']
+            email_message = 'Name: %s %s\n' % (f['firstname'], f['surname'])
+            email_message += 'Email: %s\nPhone: %s\n' % (f['email'], f['phone'])
+            email_message += 'Message: %s\n\n' % f['message']
+            if contact_type == 'Signup':
+                message = f['message'].replace('/', '')
+                email_message += 'https://112.109.84.57:8000/user/confirm_user_signup'
+                email_message += '/%s/%s/%s/=%s' % (f['email'],f['firstname'],
+                                                    f['surname'], message)
+            else:
+                if f['message'] == '':
+                        return render(
+                            request,
+                            'public/contact.html',
+                            {
+                                'title':'Contact',
+                                'year':datetime.now().year,
+                                'form':ContactForm(initial=f),
+                                'missing_field':'You have not filled in the Message field',
+                            }
+                            )
 
-            org_type = f['org_type']
-            org_name = f['org_name']
-            request_prototype = f['request_prototype']
-            firstname = f['firstname']
-            surname = f['surname']
-            phone = f['phone']
-            message = f['message']
-            email = f['email']
+            send_mail(contact_type, email_message,
+                      f['email'], ['info@zo-sports.com'])
 
-            email_message = '%s %s\n\nName: %s %s\nPhone: %s\nRequest: %s\n\nMessage: %s' % (org_type, org_name, firstname, surname, phone, request_prototype, message)
-            if f['request_signup'] == True:
-                email_message += '\n\n112.109.84.57:8001/user/confirm_user_signup/%s/%s/%s' % (email, firstname, surname)
-
-            try:
-                send_mail('General Contact', email_message, email, ['info@zo-sports.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
             return redirect('contact_success')
+
 
     return render(
         request,
@@ -68,7 +77,8 @@ def contact(request):
         {
             'title':'Contact',
             'year':datetime.now().year,
-            'form':form,
+            'form':ContactForm(initial={'contact_type':'General'}),
+            'missing_field':'',
         }
     )
 
