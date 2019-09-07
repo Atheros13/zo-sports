@@ -124,7 +124,7 @@ def confirm_user_signup_check(user):
     return user.is_staff
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
-def confirm_user_signup(request, email, firstname, surname, message):
+def confirm_user_signup(request, email, firstname, surname, phone, message):
 
     assert isinstance(request, HttpRequest)
 
@@ -136,6 +136,6 @@ def confirm_user_signup(request, email, firstname, surname, message):
         {
             'title':'Signup', 'year':datetime.now().year,
             'message':message, 'email':email, 'firstname':firstname,
-            'surname':surname,
+            'surname':surname, 'phone':phone,
         }
     )
