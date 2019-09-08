@@ -115,4 +115,36 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         '''
         Sends an email to this User.
         '''
-        pass
+        send_mail(subject, message,
+                      from_email, ['info@zo-sports.com'])
+
+    def signup(self, signup):   
+
+        self.email = signup.email
+        self.phone_number = signup.phone
+        self.is_staff = signup.is_staff
+
+        name = FullName(firstname=signup.firstname, surname=signup.surname)
+        name.save()
+        person_name = PersonName(name=name)
+        person_name.save()
+        person = Person(name=person_name)
+        person.save()
+        self.person = person
+        self.save()
+
+        message = 'Hi %s, welcome to ZO-SPORTS,\n\n' % signup.firstname
+        message += ''
+
+        self.email_user('ZO-SPORTS Login', message, 'no-reply@zo-sports.com')
+
+
+
+class Signup(models.Model):
+
+    firstname = models.CharField(max_length=30)
+    surname = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.TextField(blank=True)
+    is_staff = models.BooleanField(default=False)

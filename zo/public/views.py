@@ -7,6 +7,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from public.forms import ContactForm
+from user.models import CustomUser, Signup
 
 def home(request):
     """Renders the home page."""
@@ -47,13 +48,26 @@ def contact(request):
             email_message = 'Name: %s %s\n' % (f['firstname'], f['surname'])
             email_message += 'Email: %s\nPhone: %s\n' % (f['email'], f['phone'])
             email_message += 'Message: %s\n\n' % f['message']
-            if contact_type == 'Signup':
-                message = f['message'].replace('/', '')
-                email_message += 'https://112.109.84.57:8000/user/confirm_user_signup'
-                email_message += '/%s/%s/%s/%s/=%s' % (f['email'],f['firstname'],
-                                                    f['surname'], f['phone'], message)
+
+            unique_check = CustomUser.objects.filter(email=f['email'])
+            print(unique_check)
+
+            if contact_type == 'Signup' and not unique_check:
+                signup = Signup(firstname=f['firstname'], surname=f['surname'],
+                                email=f['email'], phone=f['phone'], message=f['message'])
+                signup.save()
+
+                email_message += 'https://112.109.84.57:8000/user/confirm_user_signup/%s' % signup.id
+
             else:
-                if f['message'] == '':
+
+                error_message = ''
+                if unique_check != []:
+                    error_message += 'A user with the email %s already exists. ' % f['email']
+                    f['email'] = ''
+                if f['message'] == '' and contact_type != 'Signup':
+                    error_message += 'Please enter a message to be sent. '
+                if error_message != '':
                         return render(
                             request,
                             'public/contact.html',
@@ -61,7 +75,7 @@ def contact(request):
                                 'title':'Contact',
                                 'year':datetime.now().year,
                                 'form':ContactForm(initial=f),
-                                'missing_field':'You have not filled in the Message field',
+                                'missing_field':error_message,
                             }
                             )
 

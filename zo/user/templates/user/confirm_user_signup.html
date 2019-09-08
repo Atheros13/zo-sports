@@ -4,15 +4,12 @@
 
 <h2>{{ title }}</h2>
 <hr />
-<p>Firstname: {{firstname}}</p>
-<p>Surname: {{surname}}</p>
-<p>Email: {{email}}</p>
-{% if message != '' %}
-    <p>Message: {{message}}</p>
-{% endif %}
 
 <form action="" method="post">
-    <input type="submit" name="contact-submit" value="Upvote" />
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="signup-accept" value="Accept" />
+    <input type="submit" name="signup-decline" value="Decline" />
 </form>
 
 {% endblock %}

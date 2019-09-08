@@ -51,3 +51,9 @@ class ContactDetailsForm(forms.ModelForm):
     class Meta:
         model = ContactDetails
         fields = ['phone_landline', 'phone_mobile', 'email']
+
+class SignupForm(forms.ModelForm):
+
+    class Meta:
+        model = Signup
+        fields = ['firstname', 'surname', 'phone', 'email', 'is_staff', 'message']

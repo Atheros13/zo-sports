@@ -69,10 +69,8 @@ def settings(request):
             if person == None:
 
                 fullname = fullname_form.save()
-                print(fullname)
                 person_name = PersonName()
                 person_name.name = fullname
-                print(person_name.name.firstname)
                 person_name.save()
 
                 person_gender = person_gender_form.save()
@@ -124,18 +122,31 @@ def confirm_user_signup_check(user):
     return user.is_staff
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
-def confirm_user_signup(request, email, firstname, surname, phone, message):
+def confirm_user_signup(request, signup_id):
 
     assert isinstance(request, HttpRequest)
 
-    message = message[1:]
+    if request.method == 'POST':      
+
+        if request.POST.get('signup-accept'):
+
+            signup = SignupForm(request.POST, instance=Signup.objects.filter(pk=signup_id)[0]).save()
+            user = CustomUser()
+            user.signup(signup)
+
+        Signup.objects.filter(pk=signup_id).delete()
+        return redirect('profile')
+
+
+    signup = Signup.objects.filter(pk=signup_id)[0]
+    print(signup)
+    form = SignupForm(instance=signup)
 
     return render(
         request,
         'user/confirm_user_signup.html',
         {
             'title':'Signup', 'year':datetime.now().year,
-            'message':message, 'email':email, 'firstname':firstname,
-            'surname':surname, 'phone':phone,
+            'form': form,
         }
     )
