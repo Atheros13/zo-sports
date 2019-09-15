@@ -47,11 +47,6 @@
     </Compile>
     <Compile Include="user\migrations\__init__.py" />
     <Compile Include="user\models.py" />
-    <Compile Include="user\models\base.py" />
-    <Compile Include="user\models\users.py" />
-    <Compile Include="user\models\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="user\tests.py" />
     <Compile Include="user\urls.py">
       <SubType>Code</SubType>
@@ -79,7 +74,6 @@
     <Folder Include="hub\migrations\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
-    <Folder Include="user\models\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
     <Folder Include="user\migrations\" />
@@ -108,6 +102,9 @@
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
+    <Content Include="user\templates\user\settings_email.html" />
+    <Content Include="user\templates\user\settings_password.html" />
+    <Content Include="user\templates\user\settings_profile.html" />
     <Content Include="user\templates\user\settings.html" />
     <Content Include="user\templates\user\profile.html" />
     <Content Include="user\templates\user\layout.html" />

@@ -34,7 +34,6 @@ class Name(models.Model):
                                     on_delete=models.CASCADE, related_name='birth_name')
        
     def __str__(self):
-
         firstname = self.firstname
         if self.preferred_name:
             firstname = self.preferred_name
@@ -88,6 +87,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     ## OWN ATTRIBUTES
     email = models.EmailField(unique=True)
+    dob = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=30, blank=True)
 
     is_active = models.BooleanField(default=True)
@@ -119,10 +119,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'user'
         verbose_name_plural = 'users'
 
+        
     def __str__(self):
-
-        if self.name != None:
-            return self.name
+        if self.name() != None:
+            return self.name().__str__()
         return self.email
 
     ### FUNCTIONS ###
@@ -145,7 +145,7 @@ class Signup(models.Model):
         password = CustomUser.objects.make_random_password()
 
         user = CustomUser(email=self.email, is_staff=self.is_staff,
-                          phone=self.phone)
+                          phone_number=self.phone)
         user.set_password(password)
         user.save()
 
@@ -165,6 +165,8 @@ class Signup(models.Model):
         message += 'and complete some of your profile.\n\n'
         message += 'If you ever need to contact us, please use the Contact form on the '
         message += 'main website.\n\nWelcome to ZO-SPORTS.'
+
+        return message
 
 ## not sure about the ones below
 

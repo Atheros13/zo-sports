@@ -15,11 +15,24 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('email', 'is_staff', 'is_huttscience')
 
 
+class SignupForm(forms.ModelForm):
+
+    class Meta:
+        model = Signup
+        fields = ['firstname', 'surname', 'phone', 'email', 'is_staff', 'message']
+
 class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'phone_number']
+        fields = ['phone_number', 'dob', 'gender']
+
+class CustomUserEmailForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ['email']
+
 
 class NameForm(forms.ModelForm):
 
@@ -40,9 +53,3 @@ class ContactDetailsForm(forms.ModelForm):
     class Meta:
         model = ContactDetails
         fields = ['phone_landline', 'phone_mobile', 'email']
-
-class SignupForm(forms.ModelForm):
-
-    class Meta:
-        model = Signup
-        fields = ['firstname', 'surname', 'phone', 'email', 'is_staff', 'message']

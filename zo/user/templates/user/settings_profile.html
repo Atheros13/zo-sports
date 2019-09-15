@@ -1,0 +1,15 @@
+{% extends "user/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<br />
+
+<form action="." method="post" class="form-horizontal">
+{% csrf_token %}
+    {{name_form.as_p}}
+    {{custom_user_form.as_p}}
+    <input type="submit" value="Update" class="btn btn-default" />
+</form>
+
+{% endblock %}

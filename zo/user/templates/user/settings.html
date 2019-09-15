@@ -4,20 +4,16 @@
 
 <h2>{{ title }}</h2>
 <br />
-<p>{{message}}</p>
-<br />
-<hr />
 
-<form action="." method="post" class="form-horizontal">
-{% csrf_token %}
-    {{fullname_form.as_p}}
+{% for c in choices %}
 
-    {{person_gender_form.as_p}}
-
-    {{person_form.as_p}}
+    <form actions="." method="post">
+    {% csrf_token %}
+    <input type="submit" name="{{c.0}}" value="{{c.1}}" class="btn btn-default" />
+    <p style="display:inline;padding-left:2em">{{c.2}}</p>
     <hr />
-    {{custom_user_form.as_p}}
-    <input type="submit" value="Update Profile" class="btn btn-default" />
-</form>
+    </form>     
+
+{% endfor %}
 
 {% endblock %}
