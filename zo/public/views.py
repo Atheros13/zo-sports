@@ -50,7 +50,6 @@ def contact(request):
             email_message += 'Message: %s\n\n' % f['message']
 
             unique_check = CustomUser.objects.filter(email=f['email'])
-            print(unique_check)
 
             if contact_type == 'Signup' and not unique_check:
                 signup = Signup(firstname=f['firstname'], surname=f['surname'],
@@ -62,11 +61,12 @@ def contact(request):
             else:
 
                 error_message = ''
-                if unique_check != []:
-                    error_message += 'A user with the email %s already exists. ' % f['email']
-                    f['email'] = ''
                 if f['message'] == '' and contact_type != 'Signup':
                     error_message += 'Please enter a message to be sent. '
+                if unique_check and contact_type == 'Signup':
+                    error_message += 'A user with the email %s already exists. ' % f['email']
+                    f['email'] = ''
+
                 if error_message != '':
                         return render(
                             request,

@@ -46,9 +46,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="user\migrations\__init__.py" />
-    <Compile Include="user\models\user.py" />
+    <Compile Include="user\models.py" />
     <Compile Include="user\models\base.py" />
-    <Compile Include="user\models\__init__.py" />
+    <Compile Include="user\models\users.py" />
+    <Compile Include="user\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="user\tests.py" />
     <Compile Include="user\urls.py">
       <SubType>Code</SubType>
@@ -76,12 +79,11 @@
     <Folder Include="hub\migrations\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
+    <Folder Include="user\models\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
     <Folder Include="user\migrations\" />
     <Folder Include="user\migrations\__pycache__\" />
-    <Folder Include="user\models\" />
-    <Folder Include="user\models\__pycache__\" />
     <Folder Include="user\templates\" />
     <Folder Include="user\templates\user\" />
     <Folder Include="user\__pycache__\" />
@@ -105,9 +107,6 @@
     <Content Include="public\static\public\scripts\public.js" />
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
-    <Content Include="user\models\__pycache__\base.cpython-37.pyc" />
-    <Content Include="user\models\__pycache__\profile.cpython-37.pyc" />
-    <Content Include="user\models\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
     <Content Include="user\templates\user\settings.html" />
     <Content Include="user\templates\user\profile.html" />

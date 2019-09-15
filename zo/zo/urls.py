@@ -15,6 +15,8 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('hub/', include('hub.urls')),
 
+    #path('huttscience/', include('huttscience.urls')),
+
     path('login/',
          LoginView.as_view
          (

@@ -4,7 +4,7 @@ from django.conf import settings
 import django.contrib.postgres.fields
 from django.db import migrations, models
 import django.db.models.deletion
-import user.models.user
+import user.models
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'users',
             },
             managers=[
-                ('objects', user.models.user.CustomUserManager()),
+                ('objects', user.models.CustomUserManager()),
             ],
         ),
         migrations.CreateModel(

@@ -120,6 +120,9 @@ def confirm_user_signup_check(user):
     ''' Checks if the user is zo-sports staff
     '''
     return user.is_staff
+def temporary_password():
+    
+    pass
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
 def confirm_user_signup(request, signup_id):
@@ -131,15 +134,13 @@ def confirm_user_signup(request, signup_id):
         if request.POST.get('signup-accept'):
 
             signup = SignupForm(request.POST, instance=Signup.objects.filter(pk=signup_id)[0]).save()
-            user = CustomUser()
-            user.signup(signup)
 
         Signup.objects.filter(pk=signup_id).delete()
+        
+        # maybe redirect to the next signup available
         return redirect('profile')
 
-
     signup = Signup.objects.filter(pk=signup_id)[0]
-    print(signup)
     form = SignupForm(instance=signup)
 
     return render(
