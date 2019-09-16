@@ -94,7 +94,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_huttscience = models.BooleanField(default=False)
  
-    temp_password = models.BooleanField(default=True) 
+    temp_password = models.BooleanField(default=True)
 
     ## OUT ATTRIBUTES
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name='custom_user')
@@ -167,6 +167,23 @@ class Signup(models.Model):
         message += 'main website.\n\nWelcome to ZO-SPORTS.'
 
         return message
+
+class PasswordReset(models.Model):
+
+    reference = models.CharField(max_length=30, unique=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def send_reset_link(self):
+
+        message = 'Hi %s,\n\n' % self.user.name()
+        message += 'You have requested to reset the password to your ZO-SPORTS login. '
+        message += 'The link to reset your password is below:\n\n'
+        message += 'www.zo-sports.com/password_reset/%s \n\n' % self.reference
+        message += 'If you did not request this reset, please ignore this email or if '
+        message += 'you are concerned about security, contact ZO-SPORTS through the website.'
+        message += '\n\nKind regards,\n\nZO-SPORTS'
+
+        self.user.email_user('ZO-SPORTS Password Reset', message)
 
 ## not sure about the ones below
 

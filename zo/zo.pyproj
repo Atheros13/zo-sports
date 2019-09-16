@@ -99,9 +99,12 @@
     <Content Include="hub\templates\hub\hub.html" />
     <Content Include="hub\templates\hub\layout.html" />
     <Content Include="public\static\public\scripts\public.js" />
+    <Content Include="public\templates\public\password_reset.html" />
+    <Content Include="public\templates\public\password_reset_request.html" />
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
+    <Content Include="user\templates\user\success.html" />
     <Content Include="user\templates\user\settings_email.html" />
     <Content Include="user\templates\user\settings_password.html" />
     <Content Include="user\templates\user\settings_profile.html" />

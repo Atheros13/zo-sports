@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from user.models import *
+from django.utils.translation import ugettext_lazy as _
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -33,13 +34,23 @@ class CustomUserEmailForm(forms.ModelForm):
         model = CustomUser
         fields = ['email']
 
-
 class NameForm(forms.ModelForm):
 
     class Meta:
         model = Name
         fields = ['firstname', 'middlenames', 'surname', 'preferred_name']
 
+class PasswordConfirm(forms.Form):
+    ''' Added to forms for extra security, allows a signed in user
+    to confirm their password before performing a potentially
+    security risk action i.e. changing email or password. '''
+
+    current_password = forms.CharField(label=_("Current Password"),
+                               widget=forms.PasswordInput({
+                                   'class': 'form-control',
+                                   'placeholder':'Current Password'}))
+
+##
 
 class AddressForm(forms.ModelForm):
 

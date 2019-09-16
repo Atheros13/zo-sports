@@ -31,3 +31,31 @@ class ContactForm(forms.Form):
     email = forms.EmailField(label="Email Address", required=True)
     phone = forms.CharField(label="Phone Number", max_length=30, required=False)
     message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)
+
+class EmailForm(forms.Form):
+
+    email = forms.EmailField(widget=forms.EmailInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Email'}))
+
+class EmailChange(forms.Form):
+
+    email1 = forms.EmailField(label=_("New Email"),widget=forms.EmailInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Email'}))
+    email2 = forms.EmailField(label=_("Confirm New Email"),
+                              widget=forms.EmailInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Email'}))
+
+class PasswordChange(forms.Form):
+
+    password1 = forms.CharField(label=_("New Password"),
+                               widget=forms.PasswordInput({
+                                   'class': 'form-control',
+                                   'placeholder':'Password'}))
+    password2 = forms.CharField(label=_("Confirm New Password"),
+                               widget=forms.PasswordInput({
+                                   'class': 'form-control',
+                                   'placeholder':'Password'}))
+
