@@ -11,10 +11,12 @@ from public.forms import PasswordChange, EmailChange
 ###
 
 def password_check(user):
-    ''' 
-    '''
-    return not user.temp_password
+    ''' Check if the user has a TemporaryPassword reference, indicating that that
+    the user needs to change their password. '''
 
+    if TemporaryPassword.objects.filter(user=user):
+        return False
+    return True
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
 def profile(request):
@@ -133,9 +135,11 @@ def settings_password(request):
                     p2 = n['password2']
                     if p1 == p2:
                         user.set_password(p1)
-                        if user.temp_password:
-                            user.temp_password = False
                         user.save()
+                        t = TemporaryPassword.objects.filter(user=user)
+                        if t:
+                            for tp in t:
+                                tp.delete()
                         update_session_auth_hash(request, request.user)
                         return render(
                             request,

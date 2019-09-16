@@ -93,8 +93,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_huttscience = models.BooleanField(default=False)
- 
-    temp_password = models.BooleanField(default=True)
 
     ## OUT ATTRIBUTES
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name='custom_user')
@@ -131,6 +129,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
         send_mail(subject, message, from_email, [self.email])
 
+### USER ADJACENT MODELS ###
+
+class TemporaryPassword(models.Model):
+
+    password = models.CharField(max_length=30)
+    is_temp = models.BooleanField(default=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
 class Signup(models.Model):
 
     firstname = models.CharField(max_length=30)
@@ -152,6 +158,10 @@ class Signup(models.Model):
         name = Name(firstname=self.firstname, surname=self.surname)
         name.user = user
         name.save()
+
+        # Creates a reference to this 
+        temp = TemporaryPassword(password=password, user=user)
+        temp.save()
 
         user.email_user('ZO-SPORTS Login', self.create_login_email(password))
 
