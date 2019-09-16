@@ -2,8 +2,13 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import update_session_auth_hash
+
 from user.forms import *
 from user.models import *
+from public.forms import PasswordChange, EmailChange
+
+###
 
 def password_check(user):
     ''' 
@@ -27,6 +32,8 @@ def profile(request):
             'profile':request.user,
         }
     )
+
+### SETTINGS ###
 
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
@@ -83,7 +90,15 @@ def settings_profile(request):
         if all_valid:
             for form in [name_form, custom_user_form]:
                 form.save()
-            return redirect('settings')
+                return render(
+                    request,
+                    'user/success.html',
+                    {
+                        'title':'Details Updated',
+                        'message':'Your profile details have successfully been updated.',
+                        'year':datetime.now().year,
+                    }
+                )
 
     else:
 
@@ -105,36 +120,48 @@ def settings_password(request):
     assert isinstance(request, HttpRequest)
 
     user = request.user
+    message = 'Enter your current password, then the password you would like to change it to.'
 
     if request.method == 'POST':
 
-        custom_user_form = CustomUserForm(request.POST, instance=user)
-        name_form = NameForm(request.POST, instance=user.name())
+        current = PasswordConfirm(request.POST)
+        new = PasswordChange(request.POST)
 
-        all_forms = [custom_user_form, name_form]
-        all_valid = True
-        for form in all_forms:
-            if form.is_valid() == False:
-                all_valid = False
+        if current.is_valid():
+            c = current.cleaned_data
+            if user.check_password(c['current_password']):
+                if new.is_valid():
+                    n = new.cleaned_data
+                    p1 = n['password1']
+                    p2 = n['password2']
+                    if p1 == p2:
+                        user.set_password(p1)
+                        user.save()
+                        update_session_auth_hash(request, request.user)
+                        return render(
+                            request,
+                            'user/success.html',
+                            {
+                                'title':'Password Changed',
+                                'message':'Your password has successfully been changed.',
+                                'year':datetime.now().year,
+                            }
+                        )
+                    else:
+                        message = 'Your new password did not match the confirm password, please try again.'
+                else:
+                    message = 'The values entered for the new password are not valid, please try again.'
             else:
-                form.cleaned_data
-
-        if all_valid:
-            for form in [name_form, custom_user_form]:
-                form.save()
-
-    else:
-
-        custom_user_form = CustomUserForm(instance=user)
-        name_form = NameForm(instance=user.name())
+                message = "You have entered an incorrect current password. If you do not know this, click the 'Forgot Password?' link below"
 
     return render(
         request,
-        'user/settings.html', 
+        'user/settings_password.html', 
         {
-            'title':'Settings','year':datetime.now().year,
-            'custom_user_form':custom_user_form,
-            'name_form':name_form,
+            'title':'Change Password','year':datetime.now().year,
+            'current_password_form':PasswordConfirm(),
+            'change_form':PasswordChange(),
+            'message':message,
         }
         )
 
@@ -144,32 +171,52 @@ def settings_email(request):
     assert isinstance(request, HttpRequest)
 
     user = request.user
-    message = '''Please be aware that your email is your log in username, 
-                and also how you can reset a forgotten password.'''
+    message = 'Enter your current password, '
+    message += 'then the new email you would like to change your account to (and sign in with).'
 
     if request.method == 'POST':
 
-        email_form = CustomUserEmailForm(request.POST, instance=user)
+        current = PasswordConfirm(request.POST)
+        new = EmailChange(request.POST)
 
-        if email_form.is_valid():
-            email_form.cleaned_data
-            email_form.save()
-            return redirect('settings')
-
-    else:
-
-        email_form = CustomUserEmailForm(instance=user)
+        if current.is_valid():
+            c = current.cleaned_data
+            if user.check_password(c['current_password']):
+                if new.is_valid():
+                    n = new.cleaned_data
+                    e1 = n['email1']
+                    e2 = n['email2']
+                    if e1 == e2:
+                        user.email = e1
+                        user.save()
+                        return render(
+                            request,
+                            'user/success.html',
+                            {
+                                'title':'Email Changed',
+                                'message':'Your email address has successfully been changed.',
+                                'year':datetime.now().year,
+                            }
+                        )
+                    else:
+                        message = 'Your new email did not match the confirm email, please try again.'
+                else:
+                    message = 'The value entered for the new email are not valid, please try again.'
+            else:
+                message = "You have entered an incorrect current password. If you do not know this, click the 'Forgot Password?' link below"
 
     return render(
         request,
-        'user/settings_email.html', 
+        'user/settings_password.html', 
         {
             'title':'Change Email','year':datetime.now().year,
+            'current_password_form':PasswordConfirm(),
+            'change_form':EmailChange(),
             'message':message,
-            'form':email_form,
         }
         )
 
+###
 
 def confirm_user_signup_check(user):
     
