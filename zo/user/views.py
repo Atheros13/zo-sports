@@ -13,7 +13,7 @@ from public.forms import PasswordChange, EmailChange
 def password_check(user):
     ''' 
     '''
-    return not user.temp_password:
+    return not user.temp_password
 
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
