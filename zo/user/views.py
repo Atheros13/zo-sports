@@ -209,3 +209,4 @@ def confirm_user_signup(request, signup_id):
             'form': form,
         }
     )
+

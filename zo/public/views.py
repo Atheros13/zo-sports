@@ -6,7 +6,7 @@ from datetime import datetime
 from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from public.forms import ContactForm
+from public.forms import ContactForm, EmailForm
 from user.models import CustomUser, Signup
 
 def home(request):
@@ -97,7 +97,6 @@ def contact(request):
     )
 
 def contact_success(request):
-
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -107,3 +106,17 @@ def contact_success(request):
             'year':datetime.now().year,
         }
     )
+
+def password_reset(request):
+    assert isinstance(request, HttpRequest)
+
+    message = 'Enter your login email and we will send you link to reset your password'
+
+    return render(
+        request,
+        'public/password_reset.html', 
+        {
+            'title':'Reset Password','year':datetime.now().year,
+            'form':EmailForm(), 'message':message,
+        }
+        )

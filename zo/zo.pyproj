@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>zo</Name>
     <RootNamespace>zo</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -61,9 +61,7 @@
     <Compile Include="public\tests.py" />
     <Compile Include="public\views.py" />
     <Compile Include="public\__init__.py" />
-    <Compile Include="zo\deploy.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="zo\deploy.py" />
     <Compile Include="zo\urls.py" />
     <Compile Include="zo\__init__.py" />
     <Compile Include="zo\settings.py" />
@@ -99,6 +97,7 @@
     <Content Include="hub\templates\hub\hub.html" />
     <Content Include="hub\templates\hub\layout.html" />
     <Content Include="public\static\public\scripts\public.js" />
+    <Content Include="public\templates\public\password_reset.html" />
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
@@ -156,10 +155,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="env\">
-      <Id>env</Id>
+    <Interpreter Include="env1\">
+      <Id>env1</Id>
       <Version>3.7</Version>
-      <Description>env (Python 3.7 (64-bit))</Description>
+      <Description>env1 (Python 3.7 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

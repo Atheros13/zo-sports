@@ -31,3 +31,9 @@ class ContactForm(forms.Form):
     email = forms.EmailField(label="Email Address", required=True)
     phone = forms.CharField(label="Phone Number", max_length=30, required=False)
     message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)
+
+class EmailForm(forms.Form):
+
+    email = forms.EmailField(widget=forms.EmailInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Email'}))
