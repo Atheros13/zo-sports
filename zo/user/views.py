@@ -119,7 +119,10 @@ def settings_password(request):
     assert isinstance(request, HttpRequest)
 
     user = request.user
-    message = 'Enter your current password, then the password you would like to change it to.'
+    if not password_check(user):
+        message = 'You need to change your temporary password before you can continue.'
+    else:
+        message = 'Enter your current password, then the password you would like to change it to.'
 
     if request.method == 'POST':
 
@@ -241,22 +244,65 @@ def confirm_user_signup(request, signup_id):
 
         Signup.objects.filter(pk=signup_id).delete()
         
-        # maybe redirect to the next signup available
+        # If this not the only Signup() waiting for process, go through the next one
         signup_list = Signup.objects.all()
         if signup_list:
-            signup_id = signup_list[0].pk
+            signup = signup_list[0]
+            return render(
+                request,
+                'user/confirm_user_signup.html',
+                {
+                    'title':'Signup', 'year':datetime.now().year,
+                    'form': SignupForm(instance=signup),
+                }
+            )
+
         else:
-            return redirect('profile')
+            return render(
+                request,
+                'user/success.html',
+                {
+                    'title':'Complete',
+                    'message':'All current signup requests have been  processed.',
+                    'year':datetime.now().year,
+                }
+            )
 
-    signup = Signup.objects.filter(pk=signup_id)[0]
-    form = SignupForm(instance=signup)
+    s = Signup.objects.filter(pk=signup_id)
+    if s:
+        signup = s[0]
 
-    return render(
-        request,
-        'user/confirm_user_signup.html',
-        {
-            'title':'Signup', 'year':datetime.now().year,
-            'form': form,
-        }
-    )
+        form = SignupForm(instance=signup)
+
+        return render(
+            request,
+            'user/confirm_user_signup.html',
+            {
+                'title':'Signup', 'year':datetime.now().year,
+                'form': form,
+            }
+        )
+    else:
+        # If this not the only Signup() waiting for process, go through the next one
+        signup_list = Signup.objects.all()
+        if signup_list:
+            signup = signup_list[0]
+            return render(
+                request,
+                'user/confirm_user_signup.html',
+                {
+                    'title':'Signup', 'year':datetime.now().year,
+                    'form': SignupForm(instance=signup),
+                }
+            )
+        else:
+            return render(
+                request,
+                'user/success.html',
+                {
+                    'title':'Signup ID Invalid',
+                    'message':'There are no current Signup requests to be processed.',
+                    'year':datetime.now().year,
+                }
+            )
 
