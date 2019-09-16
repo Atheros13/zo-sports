@@ -13,11 +13,8 @@ from public.forms import PasswordChange, EmailChange
 def password_check(user):
     ''' 
     '''
-    if user.temp_password:
-        print('Password still temporary one')
-        pass
+    return not user.temp_password:
 
-    return True
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
 def profile(request):
@@ -136,6 +133,8 @@ def settings_password(request):
                     p2 = n['password2']
                     if p1 == p2:
                         user.set_password(p1)
+                        if user.temp_password:
+                            user.temp_password = False
                         user.save()
                         update_session_auth_hash(request, request.user)
                         return render(
