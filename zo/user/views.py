@@ -8,7 +8,7 @@ from user.forms import *
 from user.models import *
 from public.forms import PasswordChange, EmailChange
 
-###
+### PROFILE ###
 
 def password_check(user):
     ''' Check if the user has a TemporaryPassword reference, indicating that that
@@ -76,7 +76,7 @@ def settings_profile(request):
     if request.method == 'POST':
 
         custom_user_form = CustomUserForm(request.POST, instance=user)
-        name_form = NameForm(request.POST, instance=user.name())
+        name_form = NameForm(request.POST, instance=user.name)
 
         all_forms = [custom_user_form, name_form]
         all_valid = True
@@ -102,7 +102,7 @@ def settings_profile(request):
     else:
 
         custom_user_form = CustomUserForm(instance=user)
-        name_form = NameForm(instance=user.name())
+        name_form = NameForm(instance=user.name)
 
     return render(
         request,
@@ -222,7 +222,7 @@ def settings_email(request):
         }
         )
 
-###
+### CONFIRM SIGNUP ###
 
 def confirm_user_signup_check(user):
     

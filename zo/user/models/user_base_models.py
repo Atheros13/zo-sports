@@ -28,9 +28,9 @@ class Name(models.Model):
                                       blank=True, default='')
 
     ### OUT ATTRIBUTES
-    user = models.ForeignKey('CustomUser', null=True, 
-                                    on_delete=models.CASCADE, related_name='user_name')
-    user_birth = models.ForeignKey('CustomUser', null=True, 
+    user_name = models.OneToOneField('CustomUser', null=True, 
+                                    on_delete=models.CASCADE, related_name='name')
+    user_birth = models.OneToOneField('CustomUser', null=True, 
                                     on_delete=models.CASCADE, related_name='birth_name')
        
     def __str__(self):
@@ -104,13 +104,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     ### IN ATTRIBUTES ###
-    def name(self, birth=False):
-        if not birth:
-            if self.user_name.all():
-                return self.user_name.all()[0]
-        if birth:
-            if self.birth_name.all():
-                return self.birth_name.all()[0]
+    # name
+    # birth_name
     
     ### META DATA ###
     class Meta:
@@ -119,9 +114,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
         
     def __str__(self):
-        if self.name() != None:
-            return self.name().__str__()
-        return self.email
+        try:
+            return self.name.__str__()
+        except:
+            return self.email
 
     ### FUNCTIONS ###
     def email_user(self, subject, message, from_email='no-reply@zo-sports.com', **kwargs):
@@ -185,7 +181,7 @@ class PasswordReset(models.Model):
 
     def send_reset_link(self):
 
-        message = 'Hi %s,\n\n' % self.user.name()
+        message = 'Hi %s,\n\n' % self.user.name
         message += 'You have requested to reset the password to your ZO-SPORTS login. '
         message += 'The link to reset your password is below:\n\n'
         message += 'www.zo-sports.com/password_reset/%s \n\n' % self.reference
@@ -194,22 +190,3 @@ class PasswordReset(models.Model):
         message += '\n\nKind regards,\n\nZO-SPORTS'
 
         self.user.email_user('ZO-SPORTS Password Reset', message)
-
-## not sure about the ones below
-
-class Address(models.Model):
-	
-	line1 = models.CharField(verbose_name='Address Line 1', max_length=50)
-	line2 = models.CharField(verbose_name='Address Line 2',max_length=50, blank=True)
-	line3 = models.CharField(verbose_name='Address Line 3',max_length=50, blank=True)
-	town_city = models.CharField(verbose_name='Town/City',max_length=50)
-	postcode = models.CharField(verbose_name='Postcode',max_length=50, blank=True)
-	country = models.CharField(verbose_name='Country',max_length=50, blank=True)
-
-class ContactDetails(models.Model):
-
-	phone_landline = models.CharField(max_length=30, blank=True) # numeric validators
-	phone_mobile = models.CharField(max_length=30, blank=True) # numeric validators
-	address = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
-	email = models.EmailField()
-

@@ -50,17 +50,3 @@ class PasswordConfirm(forms.Form):
                                    'class': 'form-control',
                                    'placeholder':'Current Password'}))
 
-##
-
-class AddressForm(forms.ModelForm):
-
-    class Meta:
-        model = Address
-        fields = ['line1', 'line2', 'line3', 'town_city', 
-                  'postcode', 'country']
-
-class ContactDetailsForm(forms.ModelForm):
-
-    class Meta:
-        model = ContactDetails
-        fields = ['phone_landline', 'phone_mobile', 'email']

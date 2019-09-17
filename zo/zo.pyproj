@@ -34,19 +34,28 @@
     <Compile Include="hub\admin.py" />
     <Compile Include="hub\apps.py" />
     <Compile Include="hub\migrations\__init__.py" />
-    <Compile Include="hub\models.py" />
+    <Compile Include="hub\models\hub_base_models.py" />
+    <Compile Include="hub\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="hub\urls.py" />
     <Compile Include="hub\tests.py" />
     <Compile Include="hub\views.py" />
     <Compile Include="hub\__init__.py" />
     <Compile Include="manage.py" />
+    <Compile Include="public\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="user\admin.py" />
     <Compile Include="user\apps.py" />
     <Compile Include="user\forms.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="user\migrations\__init__.py" />
-    <Compile Include="user\models.py" />
+    <Compile Include="user\models\user_base_models.py" />
+    <Compile Include="user\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="user\tests.py" />
     <Compile Include="user\urls.py">
       <SubType>Code</SubType>
@@ -57,7 +66,7 @@
     <Compile Include="public\apps.py" />
     <Compile Include="public\forms.py" />
     <Compile Include="public\migrations\__init__.py" />
-    <Compile Include="public\models.py" />
+    <Compile Include="public\models\public_base_models.py" />
     <Compile Include="public\tests.py" />
     <Compile Include="public\views.py" />
     <Compile Include="public\__init__.py" />
@@ -72,8 +81,11 @@
   <ItemGroup>
     <Folder Include="hub\" />
     <Folder Include="hub\migrations\" />
+    <Folder Include="hub\models\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
+    <Folder Include="public\models\" />
+    <Folder Include="user\models\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
     <Folder Include="user\migrations\" />
