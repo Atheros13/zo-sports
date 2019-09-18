@@ -12,7 +12,6 @@ class HubType(models.Model):
     def __str__(self):
         return self.type
 
-
 class Hub(models.Model):
 
     hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL)
@@ -20,7 +19,8 @@ class Hub(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
     
-    main_contact = models.ForeignKey(CustomUser, related_name='main_contact', on_delete=models.SET_NULL, null=True)
+    main_contact = models.ForeignKey(CustomUser, related_name='hub_main_contact', 
+                                     on_delete=models.SET_NULL, null=True)
     
     permission_admin = models.ManyToManyField(CustomUser, related_name='hub_permission_admin')
     permission_staff = models.ManyToManyField(CustomUser, related_name='hub_permission_staff')
@@ -47,6 +47,7 @@ class Hub(models.Model):
             return True
 
 class HubAddress(Address):
+
     ''' A wrapper for the Address object so that it can be linked to a Hub ''' 
 
     hub = models.OneToOneField(Hub, on_delete=models.CASCADE, related_name='address')
