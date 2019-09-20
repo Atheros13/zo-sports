@@ -46,6 +46,40 @@
     <Compile Include="public\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tournament\admin.py" />
+    <Compile Include="tournament\apps.py" />
+    <Compile Include="tournament\forms\__init__.py" />
+    <Compile Include="tournament\migrations\__init__.py" />
+    <Compile Include="tournament\models\contest\contest_type\contest_type_race.py" />
+    <Compile Include="tournament\models\contest\contest_type\contest_type_throw.py" />
+    <Compile Include="tournament\models\contest\contest_type\contest_type_jump.py" />
+    <Compile Include="tournament\models\contest\contest.py" />
+    <Compile Include="tournament\models\contest\contest_type\__init__.py" />
+    <Compile Include="tournament\models\contest\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tournament\models\event\event.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tournament\models\event\__init__.py" />
+    <Compile Include="tournament\models\general\apparatus.py" />
+    <Compile Include="tournament\models\general\obstacle.py" />
+    <Compile Include="tournament\models\general\measurement.py" />
+    <Compile Include="tournament\models\general\__init__.py" />
+    <Compile Include="tournament\models\grade\grade.py" />
+    <Compile Include="tournament\models\grade\__init__.py" />
+    <Compile Include="tournament\models\score\score.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tournament\models\score\scoring_system\scoring_system.py" />
+    <Compile Include="tournament\models\score\scoring_system\__init__.py" />
+    <Compile Include="tournament\models\score\__init__.py" />
+    <Compile Include="tournament\models\tournament\tournament.py" />
+    <Compile Include="tournament\models\tournament\__init__.py" />
+    <Compile Include="tournament\models\__init__.py" />
+    <Compile Include="tournament\tests.py" />
+    <Compile Include="tournament\views\__init__.py" />
+    <Compile Include="tournament\__init__.py" />
     <Compile Include="user\admin.py" />
     <Compile Include="user\apps.py" />
     <Compile Include="user\forms.py">
@@ -85,6 +119,21 @@
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
     <Folder Include="public\models\" />
+    <Folder Include="tournament\" />
+    <Folder Include="tournament\forms\" />
+    <Folder Include="tournament\migrations\" />
+    <Folder Include="tournament\models\" />
+    <Folder Include="tournament\models\contest\" />
+    <Folder Include="tournament\models\contest\contest_type\" />
+    <Folder Include="tournament\models\grade\" />
+    <Folder Include="tournament\models\general\" />
+    <Folder Include="tournament\models\event\" />
+    <Folder Include="tournament\models\score\" />
+    <Folder Include="tournament\models\score\scoring_system\" />
+    <Folder Include="tournament\models\tournament\" />
+    <Folder Include="tournament\templates\" />
+    <Folder Include="tournament\templates\tournament\" />
+    <Folder Include="tournament\views\" />
     <Folder Include="user\models\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
@@ -113,6 +162,7 @@
     <Content Include="public\static\public\scripts\public.js" />
     <Content Include="public\templates\public\password_reset.html" />
     <Content Include="public\templates\public\password_reset_request.html" />
+    <Content Include="tournament\templates\tournament\index.html" />
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />

@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'public',
     'user',
     'hub',
-    #'tournament',
+    'tournament',
+
+    'djangoyearlessdate',
 ]
 
 # Middleware framework
