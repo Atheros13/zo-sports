@@ -2,11 +2,14 @@ from django.db import models
 
 from tournament.models.contest import ContestType
 from tournament.models.general import Measurement, ObstacleRace
+from tournament.models.score import ScoredByMeasurement
 
 class ContestTypeRace(ContestType):
 
 	distance = models.ForeignKey(Measurement, null=True, on_delete=models.SET_NULL)
 	style = models.CharField(max_length=30, blank=True)
+
+    scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)
 
 	class Meta:
 

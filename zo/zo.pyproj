@@ -68,11 +68,10 @@
     <Compile Include="tournament\models\general\__init__.py" />
     <Compile Include="tournament\models\grade\grade.py" />
     <Compile Include="tournament\models\grade\__init__.py" />
+    <Compile Include="tournament\models\point\__init__.py" />
     <Compile Include="tournament\models\score\score.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tournament\models\score\scoring_system\scoring_system.py" />
-    <Compile Include="tournament\models\score\scoring_system\__init__.py" />
     <Compile Include="tournament\models\score\__init__.py" />
     <Compile Include="tournament\models\tournament\tournament.py" />
     <Compile Include="tournament\models\tournament\__init__.py" />
@@ -128,8 +127,8 @@
     <Folder Include="tournament\models\grade\" />
     <Folder Include="tournament\models\general\" />
     <Folder Include="tournament\models\event\" />
+    <Folder Include="tournament\models\point\" />
     <Folder Include="tournament\models\score\" />
-    <Folder Include="tournament\models\score\scoring_system\" />
     <Folder Include="tournament\models\tournament\" />
     <Folder Include="tournament\templates\" />
     <Folder Include="tournament\templates\tournament\" />

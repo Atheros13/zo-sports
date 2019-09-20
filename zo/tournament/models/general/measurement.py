@@ -3,10 +3,13 @@ from django.db import models
 class MeasurementType(models.Model):
     
     ''' Specifies what the MeasurementUnitGroup measures i.e. Time, Distance, Volume etc
-    for example, the Metric System that Measures Distance is different from the Metric 
+    for example, the Metric System that measures Distance is different from the Metric 
     system that measures Volume, as well as the Imperial System that measures Distance. '''
     
     type = models.CharField(max_length=30, unique=True)
+    
+    def __str__(self):
+        return self.type
 
 class MeasurementUnit(models.Model):
 
