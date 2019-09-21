@@ -3,20 +3,20 @@ from django.contrib.postgres.fields import ArrayField
 
 from tournament.models.contest import ContestType
 from tournament.models.general import Measurement
-from tournament.models.score import ScoredByMeasurement
+from tournament.models.score import ScoredByMeasurement, ScoredByMeasurementAttempts
 
 class ContestTypeJump(ContestType):
 
-	style = models.CharField(max_length=30, blank=True)
+    style = models.CharField(max_length=30, blank=True)
     scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)
 
-	class Meta:
+    class Meta:
 
-		abstract = True
+        abstract = True
 
 class ContestTypeJumpHorizontal(ContestTypeJump):
 
-	pass
+    pass
 
 class ContestTypeJumpVertical(ContestTypeJump):
 

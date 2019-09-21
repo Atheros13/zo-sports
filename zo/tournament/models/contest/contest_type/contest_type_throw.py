@@ -11,4 +11,4 @@ class ContestTypeThrow(ContestType):
 	apparatus = models.ForeignKey(ApparatusThrow, null=True,
 									on_delete=models.SET_NULL)
 
-    scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)
+	scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)

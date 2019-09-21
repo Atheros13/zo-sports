@@ -1,9 +1,8 @@
 from django.db import models
+from colorful.fields import RGBColorField
 
 from user.models import CustomUser
 from public.models import Address
-
-# Create your models here.
 
 class HubType(models.Model):
     
@@ -22,12 +21,9 @@ class Hub(models.Model):
     main_contact = models.ForeignKey(CustomUser, related_name='hub_main_contact', 
                                      on_delete=models.SET_NULL, null=True)
     
-    permission_admin = models.ManyToManyField(CustomUser, related_name='hub_permission_admin')
-    permission_staff = models.ManyToManyField(CustomUser, related_name='hub_permission_staff')
+    permission_admin = models.ManyToManyField(CustomUser, related_name='hub_admin')
+    permission_staff = models.ManyToManyField(CustomUser, related_name='hub_staff')
     is_public = models.BooleanField(default=False)
-
-    ### IN OneToOne ATTRIBUTES
-    # address
 
     class Meta:
 
@@ -51,3 +47,18 @@ class HubAddress(Address):
     ''' A wrapper for the Address object so that it can be linked to a Hub ''' 
 
     hub = models.OneToOneField(Hub, on_delete=models.CASCADE, related_name='address')
+
+
+class HubGroupType(models.Model):
+
+    name = models.CharField(max_length=30, unique=True)
+
+class HubGroup(models.Model):
+
+    hub = models.ForeignKey(Hub, on_delete=models.CASCADE, related_name='hub_groups')
+    type = models.ForeignKey(HubGroupType, null=True, on_delete=models.SET_NULL, related_name='hub_groups')
+    
+    name = models.CharField(max_length=30) 
+    description = models.TextField()
+    colour = RGBColorField(blank=True)
+    text_colour = RGBColorField(colors=['#000000', '#ffffff'], blank=True)

@@ -9,7 +9,7 @@ class ContestTypeRace(ContestType):
 	distance = models.ForeignKey(Measurement, null=True, on_delete=models.SET_NULL)
 	style = models.CharField(max_length=30, blank=True)
 
-    scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)
+	scored_by = models.ForeignKey(ScoredByMeasurement, null=True, on_delete=models.SET_NULL)
 
 	class Meta:
 

@@ -14,11 +14,10 @@ class Gender(models.Model):
     def __str__(self):
         return self.gender
 
-class Name(models.Model):
+class NameBase(models.Model):
 
-    '''
-    '''
-    ### OWN ATTRIBUTES
+    ''' An abstract name class which can be inherited by other models. '''
+
     firstname = models.CharField(verbose_name='First Name', max_length=50)
     middlenames = models.CharField(verbose_name='Middle Name/s', max_length=50, 
                                    blank=True)
@@ -27,12 +26,9 @@ class Name(models.Model):
     preferred_name = models.CharField(verbose_name='Preferred Name', max_length=50, 
                                       blank=True, default='')
 
-    ### OUT ATTRIBUTES
-    user_name = models.OneToOneField('CustomUser', null=True, 
-                                    on_delete=models.CASCADE, related_name='name')
-    user_birth = models.OneToOneField('CustomUser', null=True, 
-                                    on_delete=models.CASCADE, related_name='birth_name')
-       
+    class Meta:
+        abstract = True
+
     def __str__(self):
         firstname = self.firstname
         if self.preferred_name:
@@ -52,6 +48,16 @@ class Name(models.Model):
             firstname = self.preferred_firstname
 
         return '%s %s %s' % (firstname, self.middlenames, self.surname)
+
+class Name(NameBase):
+
+    ''' A NameBase inherited model, for use with a CustomUser. '''
+
+    user_name = models.OneToOneField('CustomUser', null=True, 
+                                    on_delete=models.CASCADE, related_name='name')
+    user_birth = models.OneToOneField('CustomUser', null=True, 
+                                    on_delete=models.CASCADE, related_name='birth_name')
+ 
 
 ### USER MODELS ###
 
