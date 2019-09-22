@@ -15,8 +15,6 @@ class RoundController(models.Model):
     event = models.OneToOneField(TournamentEvent, on_delete=models.CASCADE, related_name='round_controller')
     round_system = models.ForeignKey(RoundSystem, null=True, on_delete=models.SET_NULL, related_name='round_controllers')
     
-
-
 class Round(models.Model):
 
     ''' A Round is a container for either other Round objects or ContestInstance objects.
@@ -34,17 +32,4 @@ class Round(models.Model):
     
     # >>> next_rounds
     previous_round = models.ForeignKey('self', on_delete=models.CASCADE, related_name='next_rounds')
-
-
-class ContestInstance(models.Model):
-
-    ''' A singular instance of a Contest. Score objects that contain the scores for each Competitor
-    have a reverse relationship to ContestInstance. Depending on the type of Contest, there may be 
-    other reverse relationship objects i.e. RaceLanes, though these might be part of a more complex 
-    additional construct. '''
-
-    name = models.CharField(max_length=30, blank=True)
-    # >>> scores
-    round = models.ForeignKey(Round, on_delete=models.CASCADE, related_name='contest_instances')
-    
 
