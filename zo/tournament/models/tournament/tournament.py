@@ -25,7 +25,7 @@ class Tournament(models.Model):
     it records entries, results, and everything to do with the tournament.
     
     Many other models ForeignKey direct to this model, as such they do not appear in the 
-    stated attributes below (they are reverse related). '''
+    stated attributes (they are reverse related). '''
 
     activity = models.ForeignKey(Activity, null=True, on_delete=models.CASCADE, related_name='tournaments')
 

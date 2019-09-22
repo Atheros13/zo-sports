@@ -57,6 +57,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tournament\models\competitor\__init__.py" />
+    <Compile Include="tournament\models\round\round_system.py" />
+    <Compile Include="tournament\models\round\round.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tournament\models\round\__init__.py" />
+    <Compile Include="tournament\models\score\score_type.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tournament\models\tournament\circular_imports\contest_circular.py" />
     <Compile Include="tournament\models\contest\contest_type\contest_type_race.py" />
     <Compile Include="tournament\models\contest\contest_type\contest_type_throw.py" />
@@ -80,7 +88,7 @@
     <Compile Include="tournament\models\grade\grade.py" />
     <Compile Include="tournament\models\grade\__init__.py" />
     <Compile Include="tournament\models\point\__init__.py" />
-    <Compile Include="tournament\models\score\score.py">
+    <Compile Include="tournament\models\score\scored_by.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tournament\models\score\__init__.py" />
@@ -141,6 +149,7 @@
     <Folder Include="tournament\models\general\" />
     <Folder Include="tournament\models\event\" />
     <Folder Include="tournament\models\competitor\" />
+    <Folder Include="tournament\models\round\" />
     <Folder Include="tournament\models\point\" />
     <Folder Include="tournament\models\score\" />
     <Folder Include="tournament\models\tournament\" />
