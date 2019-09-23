@@ -57,7 +57,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tournament\models\competitor\__init__.py" />
-    <Compile Include="tournament\models\round\contest_instance.py" />
+    <Compile Include="tournament\models\contest\contest_instance.py" />
     <Compile Include="tournament\models\round\round_system.py" />
     <Compile Include="tournament\models\round\round.py">
       <SubType>Code</SubType>
