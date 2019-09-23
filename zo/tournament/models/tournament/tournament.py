@@ -39,11 +39,10 @@ class Tournament(models.Model):
     # <<< participants 
     # <<< competitors 
 
+    # <<< events
     contests = models.ManyToManyField(Contest, related_name='tournaments')
     grades = models.ManyToManyField(Grade, related_name='tournaments')
-    # <<< events
 
-    #point_system
 
 
 class TournamentEvent(models.Model):
@@ -58,3 +57,4 @@ class TournamentEvent(models.Model):
         if self.name:
             return self.name
         return self.event.__str__(tournament)
+

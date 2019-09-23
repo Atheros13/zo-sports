@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
-from tournament.models.tournament import TournamentEvent
 from .round_system import RoundSystem
+#from tournament.models.tournament import TournamentEvent
 
 class RoundController(models.Model):
 
@@ -12,7 +12,7 @@ class RoundController(models.Model):
     which is then linked to the remaining rounds (as per the RoundSystem). '''
 
     # >>> primary_round_node
-    event = models.OneToOneField(TournamentEvent, on_delete=models.CASCADE, related_name='round_controller')
+    event = models.OneToOneField(to='tournament.TournamentEvent', on_delete=models.CASCADE, related_name='round_controller')
     round_system = models.ForeignKey(RoundSystem, null=True, on_delete=models.SET_NULL, related_name='round_controllers')
     
 class Round(models.Model):

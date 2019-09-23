@@ -4,7 +4,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 
 from tournament.models.general.measurement import Measurement
-from tournament.models.competitor import Competitor
+#from tournament.models.competitor import Competitor
 from tournament.models.contest.contest_instance import ContestInstance, ContestMeasurementAttempt
 
 class Score(models.Model):
@@ -20,7 +20,7 @@ class Score(models.Model):
     content_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE, limit_choices_to=CHOICES_SCORE_TYPE)
     object_id = models.PositiveIntegerField()
 
-    competitor = models.ForeignKey(Competitor, on_delete=models.CASCADE, related_name='scores') # who
+    competitor = models.ForeignKey(to='tournament.Competitor', on_delete=models.CASCADE, related_name='scores') # who
     contest_instance = models.ForeignKey(ContestInstance, on_delete=models.CASCADE, related_name='scores') # where
     
     participation = models.BooleanField(default=False)
@@ -37,7 +37,7 @@ class ScoreTypeMeasurementRace(models.Model):
 
     # >>> measurement
 	lane = models.PositiveIntegerField(blank=True)
-	score = GenericRelation()
+	#score = GenericRelation()#to='tournament.Score')
 
 class ScoreMeasurementRace(Measurement):
 
@@ -56,7 +56,7 @@ class ScoreTypeMeasurementDistance(models.Model):
 	multiple measurements in one ContestInstance. '''
 
 	# >>> measurements
-	score = GenericRelation()
+	#score = GenericRelation()
 
 class ScoreMeasurementDistance(Measurement):
 
@@ -74,16 +74,17 @@ class ScoreTypeAttempts(models.Model):
 	contests such as High Jump or Pole Vault. '''
 
 	# >>> attempts
-	score = GenericRelation()
+	#score = GenericRelation()
 
 class ScoreAttempt(models.Model):  
+
     ''' This model records the multiple results achieved at a singular contest_measurement 
 	i.e. if the High Jump measurement is 1.6m, this model will record the results for the
 	three attempts at that height (through the self.results queryset). '''
     # >>> results
-    	
-	score_type = models.ForeignKey(ScoreTypeAttempts, on_delete=models.CASCADE, related_name='attempts')
-	contest_measurement = models.ForeignKey(ContestMeasurementAttempt, on_delete=models.CASCADE, related_name='score_attempts')
+
+    score_type = models.ForeignKey(ScoreTypeAttempts, on_delete=models.CASCADE, related_name='attempts')
+    contest_measurement = models.ForeignKey(ContestMeasurementAttempt, on_delete=models.CASCADE, related_name='score_attempts')
 
 
 class ScoreAttemptResult(models.Model):

@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
-from .round import RoundController
-
 class RoundSystem(models.Model):
 
 	CHOICES_ROUND_SYSTEM_TYPE = {'pk__in':ContentType.objects.all().filter(model__startswith='round system type')} 

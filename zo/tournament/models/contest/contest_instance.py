@@ -3,6 +3,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 
 from tournament.models.round import Round
+from tournament.models.general import Measurement
 
 class ContestInstance(models.Model):
 
