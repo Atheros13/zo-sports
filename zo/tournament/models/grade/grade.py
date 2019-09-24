@@ -5,6 +5,8 @@ from user.models import Gender
 
 class AgeGrade(models.Model):
 
+
+
 	open = models.BooleanField(default=False)
 	under = models.BooleanField(default=True)
 	age = models.PositiveIntegerField(null=True)

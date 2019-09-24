@@ -4,7 +4,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 
 from tournament.models.general.measurement import Measurement
-#from tournament.models.competitor import Competitor
 from tournament.models.contest.contest_instance import ContestInstance, ContestMeasurementAttempt
 
 class Score(models.Model):
@@ -26,10 +25,21 @@ class Score(models.Model):
     participation = models.BooleanField(default=False)
     placing = models.PositiveIntegerField(blank=True)
     score = GenericForeignKey('content_type', 'object_id') # what
+  
     
-###
+class ScoreType(models.Model):
+
+    ''' An abstract model-class which links ScoreType-models to the Score model
+    with a score attribute to a GenericRelation(Score). '''
+
+    score = GenericRelation(Score)
+
+    class Meta:
+
+        abstract = True
     
-class ScoreTypeMeasurementRace(models.Model):
+
+class ScoreTypeMeasurementRace(ScoreType):
 
 	''' ScoreType which contains a single ScoreMeasurementRace measurement,
 	used for contests such as 100m sprint or 50m butterfly swim, where a competitor has 
@@ -37,59 +47,58 @@ class ScoreTypeMeasurementRace(models.Model):
 
     # >>> measurement
 	lane = models.PositiveIntegerField(blank=True)
-	#score = GenericRelation()#to='tournament.Score')
 
 class ScoreMeasurementRace(Measurement):
 
-    ''' This model inherits from the Measurement model and adds a link to the 
+    ''' Inherits from the Measurement model and adds a link to the 
     ScoreTypeMeasurementRace model. '''
     
     # value & unit
     score_type = models.OneToOneField(ScoreTypeMeasurementRace, on_delete=models.CASCADE, related_name='measurement')
 
-###
 
-class ScoreTypeMeasurementDistance(models.Model):
+class ScoreTypeMeasurementDistance(ScoreType):
 
 	''' ScoreType which contains multiple ScoreMeasurementDistance measurements, 
 	used for contests such as Long Jump or Discus, where a competitor has 
 	multiple measurements in one ContestInstance. '''
 
-	# >>> measurements
-	#score = GenericRelation()
+    # >>> measurements
+    pass
 
 class ScoreMeasurementDistance(Measurement):
 
-	# value & unit
-	no_value = models.BooleanField(default=False)
-	order = models.PositiveIntegerField()
-	score_type = models.ForeignKey(ScoreTypeMeasurementDistance, on_delete=models.CASCADE, related_name='measurements')
+    ''' Inherits from the Measurement model and adds a link to the 
+    ScoreTypeMeasurementDistance model. The no_value attribute refers to a 
+    score of "No Jump" or "No Throw" depending on the Contest. '''
+    
+    # value & unit
+    no_value = models.BooleanField(default=False)
+    order = models.PositiveIntegerField()
+    score_type = models.ForeignKey(ScoreTypeMeasurementDistance, on_delete=models.CASCADE, related_name='measurements')
 
-###
-
-class ScoreTypeAttempts(models.Model):
+class ScoreTypeAttempts(ScoreType):
 
 	''' ScoreType where the ContestInstance establishes the measurement which is attempted. 
 	This model records what the competitor did or achieved at each attempt, used for 
 	contests such as High Jump or Pole Vault. '''
 
 	# >>> attempts
-	#score = GenericRelation()
+	pass
 
 class ScoreAttempt(models.Model):  
 
     ''' This model records the multiple results achieved at a singular contest_measurement 
 	i.e. if the High Jump measurement is 1.6m, this model will record the results for the
 	three attempts at that height (through the self.results queryset). '''
+    
     # >>> results
-
     score_type = models.ForeignKey(ScoreTypeAttempts, on_delete=models.CASCADE, related_name='attempts')
     contest_measurement = models.ForeignKey(ContestMeasurementAttempt, on_delete=models.CASCADE, related_name='score_attempts')
 
-
 class ScoreAttemptResult(models.Model):
 
-	''' This model is a singular result for a ScoreAttempt. It has an order attribute i.e. first, second, third attempt,
+	''' This model is a singular result for a ScoreAttempt. It has an order attribute i.e. for first, second, third attempt,
 	as well as the result which could be Yes (successful), No (failed), Pass (passed), N/A (when a earlier attempt was
 	successful) and "" (blank, when no attempt has been made yet. '''
 

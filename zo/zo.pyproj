@@ -35,6 +35,9 @@
     <Compile Include="hub\apps.py" />
     <Compile Include="hub\migrations\__init__.py" />
     <Compile Include="hub\models\hub_base_models.py" />
+    <Compile Include="hub\models\membership.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="hub\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>

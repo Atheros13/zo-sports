@@ -1,10 +1,10 @@
 from django.db import models
-from django.core.mail import send_mail, BadHeaderError
 from django.contrib.postgres.fields import ArrayField
 
 class Address(models.Model):
 	
     ''' An abstract object which can be inherited to add an address to another object.'''
+
     line1 = models.CharField(verbose_name='Address Line 1', max_length=50)
     line2 = models.CharField(verbose_name='Address Line 2',max_length=50, blank=True)
     line3 = models.CharField(verbose_name='Address Line 3',max_length=50, blank=True)

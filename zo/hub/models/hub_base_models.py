@@ -44,7 +44,7 @@ class Hub(models.Model):
 
 class HubAddress(Address):
 
-    ''' A wrapper for the Address object so that it can be linked to a Hub ''' 
+    ''' Inherits from the Address model and links to a Hub ''' 
 
     hub = models.OneToOneField(Hub, on_delete=models.CASCADE, related_name='address')
 
@@ -55,10 +55,20 @@ class HubGroupType(models.Model):
 
 class HubGroup(models.Model):
 
+    ''' '''
+
     hub = models.ForeignKey(Hub, on_delete=models.CASCADE, related_name='hub_groups')
     type = models.ForeignKey(HubGroupType, null=True, on_delete=models.SET_NULL, related_name='hub_groups')
-    
+
+    created_date = models.DateField()
+    end_date = models.DateField(blank=True)
+    is_active = models.BooleanField(default=True)
+
     name = models.CharField(max_length=30) 
     description = models.TextField()
+    
+    # >>> competitor_groups
+    # >>> 
+
     colour = RGBColorField(blank=True)
     text_colour = RGBColorField(colors=['#000000', '#ffffff'], blank=True)

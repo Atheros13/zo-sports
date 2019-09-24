@@ -11,6 +11,7 @@ class CompetitorGroupType(models.Model):
     each other, i.e. Houses, Schools, Clubs. '''
 
     name = models.CharField(max_length=30, unique=True)
+    description = models.TextField()
 
 class CompetitorGroup(models.Model):
 
@@ -18,6 +19,8 @@ class CompetitorGroup(models.Model):
     or a House at a School. '''
 
     name = models.CharField(max_length=30)
+    description = models.TextField()
+
     type = models.ForeignKey(CompetitorGroupType, null=True, 
                              on_delete=models.SET_NULL, 
                              related_name='competitor_groups')

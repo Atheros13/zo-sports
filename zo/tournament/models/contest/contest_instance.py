@@ -20,7 +20,7 @@ class ContestInstance(models.Model):
 
 class ContestInstanceType(models.Model):
 
-    pass
+    contest_instance = GenericRelation(ContestInstance)
 
     class Meta:
 
