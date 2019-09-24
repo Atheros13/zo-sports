@@ -33,8 +33,15 @@
   <ItemGroup>
     <Compile Include="hub\admin.py" />
     <Compile Include="hub\apps.py" />
+    <Compile Include="hub\forms\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="hub\forms\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="hub\migrations\__init__.py" />
-    <Compile Include="hub\models\hub_base_models.py" />
+    <Compile Include="hub\models\hub.py" />
+    <Compile Include="hub\models\hub_member.py" />
     <Compile Include="hub\models\membership.py">
       <SubType>Code</SubType>
     </Compile>
@@ -117,7 +124,12 @@
     <Compile Include="user\urls.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="user\views.py" />
+    <Compile Include="user\views\contact.py" />
+    <Compile Include="user\views\hubs_views.py" />
+    <Compile Include="user\views\views.py" />
+    <Compile Include="user\views\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="user\__init__.py" />
     <Compile Include="public\admin.py" />
     <Compile Include="public\apps.py" />
@@ -139,6 +151,7 @@
     <Folder Include="hub\" />
     <Folder Include="hub\migrations\" />
     <Folder Include="hub\models\" />
+    <Folder Include="hub\forms\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
     <Folder Include="public\models\" />
@@ -162,6 +175,7 @@
     <Folder Include="tournament\templates\tournament\" />
     <Folder Include="tournament\views\" />
     <Folder Include="user\models\" />
+    <Folder Include="user\views\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
     <Folder Include="user\migrations\" />
@@ -193,6 +207,7 @@
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
+    <Content Include="user\templates\user\hubs.html" />
     <Content Include="user\templates\user\success.html" />
     <Content Include="user\templates\user\settings_email.html" />
     <Content Include="user\templates\user\settings_password.html" />

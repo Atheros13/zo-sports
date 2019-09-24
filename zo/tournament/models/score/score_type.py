@@ -59,11 +59,11 @@ class ScoreMeasurementRace(Measurement):
 
 class ScoreTypeMeasurementDistance(ScoreType):
 
-	''' ScoreType which contains multiple ScoreMeasurementDistance measurements, 
-	used for contests such as Long Jump or Discus, where a competitor has 
-	multiple measurements in one ContestInstance. '''
+    ''' ScoreType which contains multiple ScoreMeasurementDistance measurements, 
+    used for contests such as Long Jump or Discus, 
+    where a competitor has multiple measurements in one ContestInstance. '''
 
-    # >>> measurements
+    # <<< measurements
     pass
 
 class ScoreMeasurementDistance(Measurement):

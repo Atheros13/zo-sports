@@ -9,6 +9,8 @@ urlpatterns = [
     path('settings_password/', views.settings_password, name='settings_password'),
     path('settings_email/', views.settings_email, name='settings_email'),
 
+    path('hubs/', views.hubs_main_page, name='user_hubs'),
+
     path('confirm_user_signup/<int:signup_id>', 
          views.confirm_user_signup, name='confirm_user_signup'),
     ]
