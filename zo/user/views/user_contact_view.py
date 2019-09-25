@@ -9,6 +9,17 @@ from hub.models import Hub
 
 from user.forms import HubSignUpForm, UserContactForm
 
+class ContactFormChoices():
+
+    ''' An object that contains the button_text, description and form for a Form choice 
+    on a Contact page. '''
+
+    def __init__(self, button_text, description, form):
+
+        self.button_text = button_text
+        self.description = description
+        self.form = form
+
 def password_check(user):
     ''' Check if the user has a TemporaryPassword reference, indicating that that
     the user needs to change their password. '''
@@ -21,20 +32,23 @@ def password_check(user):
 def contact(request):
     assert isinstance(request, HttpRequest)
 
-
-    form = HubSignUpForm()
-    buttons = [
-            ['General', 'Click to send a general message'],
-            ['Technical', 'Click for technical issues, please include as much information as possible'],
-            ['Create Hub', "Click to request to create a new Hub, i.e. a School, Club etc. Please make sure the Hub doesn't already exist."],
-            ]
+    choices = [ContactFormChoices('General', 
+                                  'Click to send a general message', 
+                                  HubSignUpForm()),
+               ContactFormChoices('Technical', 
+                                  'Click for technical issues, please include as much information as possible',
+                                  HubSignUpForm()),
+               ContactFormChoices('Create Hub', 
+                                  "Click to request to create a new Hub, i.e. a School, Club etc. Please make sure the Hub doesn't already exist.",
+                                  HubSignUpForm()),]
 
     return render(
         request,
-        'user/contact.html',
+        'user/user_contact.html',
         {
+            'layout': 'public/layout.html',
             'title':'Contact',
-            'buttons': buttons, 'form':form,
+            'choices': choices, 'form':choices[0].form,
             'year':datetime.now().year,
         }
     )

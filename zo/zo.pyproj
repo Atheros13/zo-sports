@@ -207,6 +207,7 @@
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
+    <Content Include="user\templates\user\user_contact.html" />
     <Content Include="user\templates\user\contact.html" />
     <Content Include="user\templates\user\hubs.html" />
     <Content Include="user\templates\user\success.html" />
