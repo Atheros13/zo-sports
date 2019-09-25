@@ -28,7 +28,7 @@ class MeasurementUnitGroup(models.Model):
 
 	measurement_type = models.ForeignKey(MeasurementType, null=True, on_delete=models.SET_NULL)
 	name = models.CharField(max_length=30)
-	description = models.TextField()
+	description = models.TextField(blank=True, default='')
 
 	def __str__(self):
 		return self.name

@@ -1,9 +1,15 @@
 
 from datetime import datetime
 from django.urls import include, path
+from django.shortcuts import reverse
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from public import forms, views
+
+class LoginView(LoginView):
+
+    def get_success_url(self):
+        return reverse('profile')
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -30,7 +36,7 @@ urlpatterns = [
              {
                  'title': 'Log in',
                  'year' : datetime.now().year,
-             }
+             },
          ),
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),

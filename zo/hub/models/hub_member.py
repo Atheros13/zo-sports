@@ -1,6 +1,6 @@
 from django.db import models
 
-from .hub import Hub, HubGroup
+from .hub import Hub, HubGroup, HubType
 from .membership import Membership
 from public.models import Address
 from user.models import CustomUser, NameBase, Gender
@@ -25,7 +25,7 @@ class HubMember(models.Model):
     # >>> tournament_competitors (Competitor)
 
     # >>> name (HubMemberName)
-    dob = models.DateField(blank=True)
+    dob = models.DateField(null=True)
     gender = models.ForeignKey(Gender, null=True, on_delete=models.SET_NULL)
     # >>> address (HubMemberAddress)
     phone = models.CharField(max_length=30, blank=True)
@@ -35,6 +35,7 @@ class HubMembershipType(models.Model):
 
     ''' A singular type of Hub membership, i.e. Student, Teacher, Staff, Parent, Club Member etc. '''
 
+    hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL, related_name='hub_membership_types')
     name = models.CharField(max_length=30)
     description = models.TextField(blank=True)
 

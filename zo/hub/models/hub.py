@@ -8,6 +8,7 @@ from public.models import Address
 class HubType(models.Model):
     
     type = models.CharField(max_length=30, unique=True)
+    #super_type = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='sub_types')
 
     def __str__(self):
         return self.type
@@ -65,10 +66,21 @@ class HubGroup(Membership):
     type = models.ForeignKey(HubGroupType, null=True, on_delete=models.SET_NULL, related_name='hub_groups')
 
     name = models.CharField(max_length=30) 
-    description = models.TextField()
+    description = models.TextField(blank=True, default='')
     
     # >>> competitor_groups
     # >>> 
 
     colour = RGBColorField(blank=True)
     text_colour = RGBColorField(colors=['#000000', '#ffffff'], blank=True)
+
+
+class HubSignUp(models.Model):
+
+    hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL, verbose_name='Hub Type')
+    name = models.CharField(verbose_name='Hub Name', max_length=30)
+    phone = models.CharField(verbose_name='Hub Phone', max_length=30, blank=True)
+    email = models.EmailField(verbose_name='Hub Email', blank=True)
+    town_city = models.CharField(verbose_name='Town/City', max_length=30)
+    
+    requester = models.ForeignKey(CustomUser, null=True, on_delete=models.CASCADE)

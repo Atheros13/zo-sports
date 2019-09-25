@@ -93,7 +93,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     ## OWN ATTRIBUTES
     email = models.EmailField(unique=True)
-    dob = models.DateField(null=True, blank=True)
+    dob = models.DateField(null=True)
     phone_number = models.CharField(max_length=30, blank=True)
 
     is_active = models.BooleanField(default=True)

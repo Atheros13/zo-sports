@@ -124,8 +124,8 @@
     <Compile Include="user\urls.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="user\views\contact.py" />
-    <Compile Include="user\views\hubs_views.py" />
+    <Compile Include="user\views\user_contact_view.py" />
+    <Compile Include="user\views\user_hubs_view.py" />
     <Compile Include="user\views\views.py" />
     <Compile Include="user\views\__init__.py">
       <SubType>Code</SubType>
@@ -207,6 +207,7 @@
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
+    <Content Include="user\templates\user\contact.html" />
     <Content Include="user\templates\user\hubs.html" />
     <Content Include="user\templates\user\success.html" />
     <Content Include="user\templates\user\settings_email.html" />
@@ -222,7 +223,6 @@
     <Content Include="public\static\public\content\bootstrap.css" />
     <Content Include="public\static\public\content\bootstrap.min.css" />
     <Content Include="public\static\public\content\images\bg_grass_track.jpg" />
-    <Content Include="public\static\public\content\public.css" />
     <Content Include="public\static\public\content\site.css" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="public\static\public\fonts\glyphicons-halflings-regular.svg" />

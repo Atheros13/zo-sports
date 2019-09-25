@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from user.models import *
+from hub.models import HubSignUp
 from django.utils.translation import ugettext_lazy as _
 
 class CustomUserCreationForm(UserCreationForm):
@@ -50,3 +51,14 @@ class PasswordConfirm(forms.Form):
                                    'class': 'form-control',
                                    'placeholder':'Current Password'}))
 
+class HubSignUpForm(forms.ModelForm):
+
+    class Meta:
+        model = HubSignUp
+        fields = ['hub_type', 'name', 'phone', 'email', 'town_city']
+
+class UserContactForm(forms.Form):
+
+    email = forms.EmailField(label="Email Address", required=True)
+    phone = forms.CharField(label="Phone Number", max_length=30, required=False)
+    message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)

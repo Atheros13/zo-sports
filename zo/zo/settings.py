@@ -147,5 +147,8 @@ EMAIL_HOST_PASSWORD = email_password
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
+# Login
+
+
 # Custom User 
 AUTH_USER_MODEL = 'user.CustomUser'

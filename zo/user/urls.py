@@ -10,6 +10,7 @@ urlpatterns = [
     path('settings_email/', views.settings_email, name='settings_email'),
 
     path('hubs/', views.hubs_main_page, name='user_hubs'),
+    path('contact/', views.contact, name='user_contact'),
 
     path('confirm_user_signup/<int:signup_id>', 
          views.confirm_user_signup, name='confirm_user_signup'),

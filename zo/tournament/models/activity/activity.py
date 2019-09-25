@@ -5,7 +5,7 @@ class ActivityType(models.Model):
     ''' The category that an Activity belongs to i.e. Sport. '''
 
     name = models.CharField(max_length=30, unique=True)
-    description = models.TextField()
+    description = models.TextField(blank=True, default='')
 
 class Activity(models.Model):
 
@@ -17,6 +17,6 @@ class Activity(models.Model):
                              on_delete=models.CASCADE,
                              related_name='activities')
     name = models.CharField(max_length=30)
-    description = models.TextField()
+    description = models.TextField(blank=True, default='')
 
-    super_activity = models.ForeignKey('self', on_delete=models.CASCADE, related_name='sub_activities')
+    super_activity = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='sub_activities')

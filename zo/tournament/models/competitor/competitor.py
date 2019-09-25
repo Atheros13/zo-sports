@@ -20,7 +20,7 @@ class Competitor(models.Model):
                                          related_name='competitors')
 
     # >>> name
-    dob = models.DateField(blank=True)
+    dob = models.DateField(null=True)
     gender = models.ForeignKey(Gender, null=True,
                                on_delete=models.SET_NULL)
     ranks = models.ManyToManyField(Rank)

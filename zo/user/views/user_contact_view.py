@@ -4,10 +4,10 @@ from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import update_session_auth_hash
 
-from user.models import CustomUser, TemporaryPassword
-from hub.models import Hub, HubMember
+from user.models import TemporaryPassword
+from hub.models import Hub
 
-### PROFILE ###
+from user.forms import HubSignUpForm, UserContactForm
 
 def password_check(user):
     ''' Check if the user has a TemporaryPassword reference, indicating that that
@@ -18,20 +18,23 @@ def password_check(user):
     return True
 @login_required(login_url='/login/', redirect_field_name=None)
 @user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
-def hubs_main_page(request):
+def contact(request):
     assert isinstance(request, HttpRequest)
 
-    user = request.user
-    h = Hub.objects.filter(members__user=user).filter(members__memberships__is_active)
-    if h:
-        print(h) 
 
+    form = HubSignUpForm()
+    buttons = [
+            ['General', 'Click to send a general message'],
+            ['Technical', 'Click for technical issues, please include as much information as possible'],
+            ['Create Hub', "Click to request to create a new Hub, i.e. a School, Club etc. Please make sure the Hub doesn't already exist."],
+            ]
 
     return render(
         request,
-        'user/hubs.html',
+        'user/contact.html',
         {
-            'title':'Hubs',
+            'title':'Contact',
+            'buttons': buttons, 'form':form,
             'year':datetime.now().year,
         }
     )
