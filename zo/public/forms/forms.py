@@ -1,6 +1,3 @@
-"""
-Definition of forms.
-"""
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
@@ -16,21 +13,6 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
 
-class ContactForm(forms.Form):
-
-    CHOICES_CONTACT_TYPE = [
-        ('General', 'General'), ('Signup', 'Signup'),
-        ('Technical', 'Technical')
-        ]
-
-    contact_type = forms.ChoiceField(label='Subject',
-                                   choices=CHOICES_CONTACT_TYPE,
-                                   widget=forms.RadioSelect)
-    firstname = forms.CharField(label="First Name", max_length=50, required=True)
-    surname = forms.CharField(label="Surname", max_length=50, required=True)
-    email = forms.EmailField(label="Email Address", required=True)
-    phone = forms.CharField(label="Phone Number", max_length=30, required=False)
-    message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)
 
 class EmailForm(forms.Form):
 

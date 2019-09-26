@@ -3,19 +3,18 @@
 {% block content %}
 
     <h2>{{ title }}</h2>
-    <br />
     <p></p>
 
     <div class="row page-content">
-        <div class="col-md-5">
-
+        <div class="col-md-4">
+            <br />
             {% for c in choices %}
             <hr />
             <div class="row">
                 <div class="col-md-4">
                     <form actions="." method="post">
                         {% csrf_token %}
-                        <input type="submit" name="{{c.button_text}}" value="{{c.button_text}}" class="btn btn-default btn-contact" />
+                        <input type="submit" name="Choice {{c.title}}" value="{{c.title}}" class="btn btn-default btn-contact" />
                     </form>
                 </div>
                 <div class="col-md-8">
@@ -26,9 +25,21 @@
             {% endfor %}
 
         </div>
-        <div class="col-md-7">
-            <p>{{form.as_p}}</p>
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <h3>{{form.title}} Form</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div id="contact-form-type">
+                {{form.as_p}}
+                </div>
+            <div class="form-actions">
+                <button name="{{form.title}}" value="{{form.title}}" type="submit">Submit Form</button>
+            </div>
+            </form>
         </div>
+
+
     </div>
 
 

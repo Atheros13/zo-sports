@@ -91,8 +91,9 @@ def settings_profile(request):
                 form.save()
                 return render(
                     request,
-                    'user/success.html',
+                    'public/message.html',
                     {
+                        'layout':'user/layout.html',
                         'title':'Details Updated',
                         'message':'Your profile details have successfully been updated.',
                         'year':datetime.now().year,
@@ -260,8 +261,9 @@ def confirm_user_signup(request, signup_id):
         else:
             return render(
                 request,
-                'user/success.html',
-                {
+                    'public/message.html',
+                    {
+                    'layout':'user/layout.html',
                     'title':'Complete',
                     'message':'All current signup requests have been  processed.',
                     'year':datetime.now().year,
@@ -298,8 +300,9 @@ def confirm_user_signup(request, signup_id):
         else:
             return render(
                 request,
-                'user/success.html',
-                {
+                    'public/message.html',
+                    {
+                        'layout':'user/layout.html',
                     'title':'Signup ID Invalid',
                     'message':'There are no current Signup requests to be processed.',
                     'year':datetime.now().year,

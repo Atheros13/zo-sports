@@ -7,18 +7,10 @@ from django.contrib.auth import update_session_auth_hash
 from user.models import TemporaryPassword
 from hub.models import Hub
 
-from user.forms import HubSignUpForm, UserContactForm
+from user.forms import HubSignUpContactForm
+from public.forms import GeneralContactForm, TechnicalContactForm
 
-class ContactFormChoices():
-
-    ''' An object that contains the button_text, description and form for a Form choice 
-    on a Contact page. '''
-
-    def __init__(self, button_text, description, form):
-
-        self.button_text = button_text
-        self.description = description
-        self.form = form
+from public.general.classes import ContactFormChoice
 
 def password_check(user):
     ''' Check if the user has a TemporaryPassword reference, indicating that that
@@ -32,23 +24,37 @@ def password_check(user):
 def contact(request):
     assert isinstance(request, HttpRequest)
 
-    choices = [ContactFormChoices('General', 
-                                  'Click to send a general message', 
-                                  HubSignUpForm()),
-               ContactFormChoices('Technical', 
-                                  'Click for technical issues, please include as much information as possible',
-                                  HubSignUpForm()),
-               ContactFormChoices('Create Hub', 
-                                  "Click to request to create a new Hub, i.e. a School, Club etc. Please make sure the Hub doesn't already exist.",
-                                  HubSignUpForm()),]
+    choices = [GeneralContactForm, TechnicalContactForm, HubSignUpContactForm]
+
+    form = choices[0]
+    user = request.user
+
+    if request.method == 'POST':
+
+        for c in choices:
+            if request.POST.get('Choice %s' % c.title):
+                form = c
+            elif request.POST.get(c.title):
+                if c(request.POST).is_valid():
+                    c(request.POST).process_contact(user=user)
+                    return render(
+                        request,
+                        'public/message.html',
+                        {
+                            'layout': 'user/layout.html',
+                            'title':'Success',
+                            'message': 'Your %s request has been sent.' % c.title,
+                            'year': datetime.now().year,
+                            }
+                        )
 
     return render(
         request,
         'user/user_contact.html',
         {
-            'layout': 'public/layout.html',
+            'layout': 'user/layout.html',
             'title':'Contact',
-            'choices': choices, 'form':choices[0].form,
+            'choices': choices, 'form':form,
             'year':datetime.now().year,
         }
     )

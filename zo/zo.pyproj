@@ -53,6 +53,13 @@
     <Compile Include="hub\views.py" />
     <Compile Include="hub\__init__.py" />
     <Compile Include="manage.py" />
+    <Compile Include="public\forms\contact_forms.py" />
+    <Compile Include="public\forms\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="public\general\classes.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="public\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -112,7 +119,11 @@
     <Compile Include="tournament\__init__.py" />
     <Compile Include="user\admin.py" />
     <Compile Include="user\apps.py" />
-    <Compile Include="user\forms.py">
+    <Compile Include="user\forms\contact_forms.py" />
+    <Compile Include="user\forms\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="user\forms\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="user\migrations\__init__.py" />
@@ -133,7 +144,7 @@
     <Compile Include="user\__init__.py" />
     <Compile Include="public\admin.py" />
     <Compile Include="public\apps.py" />
-    <Compile Include="public\forms.py" />
+    <Compile Include="public\forms\forms.py" />
     <Compile Include="public\migrations\__init__.py" />
     <Compile Include="public\models\public_base_models.py" />
     <Compile Include="public\tests.py" />
@@ -155,6 +166,8 @@
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
     <Folder Include="public\models\" />
+    <Folder Include="public\general\" />
+    <Folder Include="public\forms\" />
     <Folder Include="tournament\" />
     <Folder Include="tournament\forms\" />
     <Folder Include="tournament\migrations\" />
@@ -175,6 +188,7 @@
     <Folder Include="tournament\templates\tournament\" />
     <Folder Include="tournament\views\" />
     <Folder Include="user\models\" />
+    <Folder Include="user\forms\" />
     <Folder Include="user\views\" />
     <Folder Include="zo\site\" />
     <Folder Include="user\" />
@@ -201,6 +215,7 @@
     <Content Include="hub\templates\hub\hub.html" />
     <Content Include="hub\templates\hub\layout.html" />
     <Content Include="public\static\public\scripts\public.js" />
+    <Content Include="public\templates\public\message.html" />
     <Content Include="public\templates\public\password_reset.html" />
     <Content Include="public\templates\public\password_reset_request.html" />
     <Content Include="tournament\templates\tournament\index.html" />
@@ -208,9 +223,7 @@
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
     <Content Include="user\templates\user\user_contact.html" />
-    <Content Include="user\templates\user\contact.html" />
     <Content Include="user\templates\user\hubs.html" />
-    <Content Include="user\templates\user\success.html" />
     <Content Include="user\templates\user\settings_email.html" />
     <Content Include="user\templates\user\settings_password.html" />
     <Content Include="user\templates\user\settings_profile.html" />
@@ -246,7 +259,6 @@
     <None Include="public\static\public\scripts\_references.js" />
     <Content Include="public\templates\public\about.html" />
     <Content Include="public\templates\public\contact.html" />
-    <Content Include="public\templates\public\contact_success.html" />
     <Content Include="public\templates\public\index.html" />
     <Content Include="public\templates\public\layout.html" />
     <Content Include="public\templates\public\login.html" />

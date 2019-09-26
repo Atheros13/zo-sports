@@ -96,6 +96,11 @@ def contact(request):
         }
     )
 
+def contact_new(request):
+
+    pass
+
+
 def contact_success(request):
 
     assert isinstance(request, HttpRequest)
@@ -104,9 +109,10 @@ def contact_success(request):
 
     return render(
         request,
-        'public/contact_success.html',
+        'public/message.html',
         {
-            'title':'Success',
+            'layout':'public/layout.html',
+            'title':'Message Sent',
             'message':message,
             'year':datetime.now().year,
         }
@@ -158,8 +164,9 @@ def password_reset_sent(request):
 
     return render(
         request,
-        'public/contact_success.html',
+        'public/message.html',
         {
+            'layout':'public/layout.html',
             'title':'Success',
             'message':message,
             'year':datetime.now().year,
@@ -181,8 +188,9 @@ def password_reset(request, reset_reference):
         else:
             return render(
                 request,
-                'public/contact_success.html',
+                'public/message.html',
                 {
+                    'layout':'public/layout.html',
                     'title':'Incorrect Reset Link',
                     'message':'This link has either expired or is incorrect',
                     'year':datetime.now().year,
@@ -208,8 +216,9 @@ def password_reset(request, reset_reference):
 
                 return render(
                     request,
-                    'public/contact_success.html',
+                    'public/message.html',
                     {
+                        'layout':'public/layout.html',
                         'title':'Success',
                         'message':'Your password has successfully been reset',
                         'year':datetime.now().year,
