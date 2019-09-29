@@ -147,8 +147,9 @@ def settings_password(request):
                         update_session_auth_hash(request, request.user)
                         return render(
                             request,
-                            'user/success.html',
+                            'public/message.html',
                             {
+                                'layout': 'user/layout.html',
                                 'title':'Password Changed',
                                 'message':'Your password has successfully been changed.',
                                 'year':datetime.now().year,
@@ -198,8 +199,9 @@ def settings_email(request):
                         user.save()
                         return render(
                             request,
-                            'user/success.html',
+                            'public/message.html',
                             {
+                                'layout': 'user/layout.html',
                                 'title':'Email Changed',
                                 'message':'Your email address has successfully been changed.',
                                 'year':datetime.now().year,
@@ -223,7 +225,7 @@ def settings_email(request):
         }
         )
 
-### CONFIRM SIGNUP ###
+### CONFIRM USER SIGNUP ###
 
 def confirm_user_signup_check(user):
     
@@ -240,13 +242,13 @@ def confirm_user_signup(request, signup_id):
 
         if request.POST.get('signup-accept'):
 
-            signup = SignupForm(request.POST, instance=Signup.objects.filter(pk=signup_id)[0]).save()
+            signup = SignupForm(request.POST, instance=UserSignup.objects.filter(pk=signup_id)[0]).save()
             signup.create_custom_user()
 
-        Signup.objects.filter(pk=signup_id).delete()
+        UserSignup.objects.filter(pk=signup_id).delete()
         
         # If this not the only Signup() waiting for process, go through the next one
-        signup_list = Signup.objects.all()
+        signup_list = UserSignup.objects.all()
         if signup_list:
             signup = signup_list[0]
             return render(
@@ -270,7 +272,7 @@ def confirm_user_signup(request, signup_id):
                 }
             )
 
-    s = Signup.objects.filter(pk=signup_id)
+    s = UserSignup.objects.filter(pk=signup_id)
     if s:
         signup = s[0]
 
@@ -286,7 +288,7 @@ def confirm_user_signup(request, signup_id):
         )
     else:
         # If this not the only Signup() waiting for process, go through the next one
-        signup_list = Signup.objects.all()
+        signup_list = UserSignup.objects.all()
         if signup_list:
             signup = signup_list[0]
             return render(
@@ -309,3 +311,10 @@ def confirm_user_signup(request, signup_id):
                 }
             )
 
+### CONFIRM HUB SIGNUP ###
+
+@login_required(login_url='/login/', redirect_field_name=None)
+@user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
+def confirm_hub_signup(request, signup_id):
+
+    pass

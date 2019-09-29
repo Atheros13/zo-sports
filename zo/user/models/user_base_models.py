@@ -139,7 +139,7 @@ class TemporaryPassword(models.Model):
     is_temp = models.BooleanField(default=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-class Signup(models.Model):
+class UserSignup(models.Model):
 
     firstname = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)

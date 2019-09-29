@@ -3,21 +3,35 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, BadHeaderError
 
-class ContactForm(forms.Form):
+from user.models import CustomUser, UserSignup
 
-    CHOICES_CONTACT_TYPE = [
-        ('General', 'General'), ('Signup', 'Signup'),
-        ('Technical', 'Technical')
-        ]
 
-    contact_type = forms.ChoiceField(label='Subject',
-                                   choices=CHOICES_CONTACT_TYPE,
-                                   widget=forms.RadioSelect)
-    firstname = forms.CharField(label="First Name", max_length=50, required=True)
-    surname = forms.CharField(label="Surname", max_length=50, required=True)
-    email = forms.EmailField(label="Email Address", required=True)
-    phone = forms.CharField(label="Phone Number", max_length=30, required=False)
-    message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)
+class UserSignUpContactForm(forms.ModelForm):
+
+    title = 'Sign Up'
+    description = ''
+
+    class Meta:
+        model = UserSignup
+        fields = ['firstname', 'surname', 'phone', 'email', 'message']
+
+    def process_contact(self, *args, **kwargs):
+
+        model = self.save(commit=False)
+
+        if CustomUser.objects.filter(email=model.email) or UserSignup.objects.filter(email=model.email):
+            return False
+
+        model.save()
+        email_message = 'Name: %s %s\n' % (model.firstname, model.surname)
+        email_message += 'Email: %s\nPhone: %s\n' % (model.email, model.phone)
+        email_message += 'Message: %s\n\n' % model.message
+        email_message += 'https://112.109.84.57:8000/user/confirm_user_signup/%s' % model.id
+
+        send_mail('User Signup', email_message, model.email, ['info@zo-sports.com'])
+
+        return True
+
 
 class GeneralContactForm(forms.Form):
 
@@ -38,7 +52,7 @@ class GeneralContactForm(forms.Form):
         elif user:
             email = user.email
         
-        subject = '%s Contact' % self.contact_type
+        subject = '%s Contact' % self.title
 
         message = ''
         if f['phone']:

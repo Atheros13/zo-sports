@@ -1,30 +1,16 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import update_session_auth_hash
 
-from user.models import TemporaryPassword
-from hub.models import Hub
-
-from user.forms import HubSignUpContactForm
-from public.forms import GeneralContactForm, TechnicalContactForm
+from public.forms import GeneralContactForm, TechnicalContactForm, UserSignUpContactForm
 
 from public.general.classes import ContactFormChoice
 
-def password_check(user):
-    ''' Check if the user has a TemporaryPassword reference, indicating that that
-    the user needs to change their password. '''
-
-    if TemporaryPassword.objects.filter(user=user):
-        return False
-    return True
-@login_required(login_url='/login/', redirect_field_name=None)
-@user_passes_test(password_check, login_url='/user/settings_password/', redirect_field_name=None)
 def contact(request):
     assert isinstance(request, HttpRequest)
 
-    choices = [GeneralContactForm, TechnicalContactForm, HubSignUpContactForm]
+    choices = [GeneralContactForm, TechnicalContactForm, UserSignUpContactForm]
 
     form = choices[0]
     user = request.user
@@ -44,22 +30,25 @@ def contact(request):
                             request,
                             'public/message.html',
                             {
-                                'layout': 'user/layout.html',
+                                'layout': 'public/layout.html',
                                 'title':'Success',
                                 'message': 'Your %s request has been sent.' % contact_form.title,
                                 'year': datetime.now().year,
                                 }
                             )
                     else:
-                        pass
+                        form = c
+                        error_message = '''That email has already been used to sign up. 
+                                        It may take some time for a sign up request to be checked and verified, or 
+                                        if you need to reset your password, use the link on the Login Page.'''
     return render(
         request,
         'public/contact.html',
         {
-            'layout': 'user/layout.html',
+            'layout': 'public/layout.html',
             'title':'Contact',
             'choices': choices, 'form':form,
             'year':datetime.now().year,
-            'error_message':error_message,
+            'error_message': error_message,
         }
     )

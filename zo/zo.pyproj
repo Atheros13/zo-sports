@@ -63,6 +63,10 @@
     <Compile Include="public\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="public\views\public_contact_view.py" />
+    <Compile Include="public\views\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tournament\admin.py" />
     <Compile Include="tournament\apps.py" />
     <Compile Include="tournament\forms\__init__.py" />
@@ -136,7 +140,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="user\views\user_contact_view.py" />
-    <Compile Include="user\views\user_hubs_view.py" />
+    <Compile Include="user\views\user_hub_view.py" />
     <Compile Include="user\views\views.py" />
     <Compile Include="user\views\__init__.py">
       <SubType>Code</SubType>
@@ -148,7 +152,7 @@
     <Compile Include="public\migrations\__init__.py" />
     <Compile Include="public\models\public_base_models.py" />
     <Compile Include="public\tests.py" />
-    <Compile Include="public\views.py" />
+    <Compile Include="public\views\views.py" />
     <Compile Include="public\__init__.py" />
     <Compile Include="zo\deploy.py">
       <SubType>Code</SubType>
@@ -168,6 +172,7 @@
     <Folder Include="public\models\" />
     <Folder Include="public\general\" />
     <Folder Include="public\forms\" />
+    <Folder Include="public\views\" />
     <Folder Include="tournament\" />
     <Folder Include="tournament\forms\" />
     <Folder Include="tournament\migrations\" />
@@ -218,11 +223,11 @@
     <Content Include="public\templates\public\message.html" />
     <Content Include="public\templates\public\password_reset.html" />
     <Content Include="public\templates\public\password_reset_request.html" />
+    <Content Include="public\templates\public\contact.html" />
     <Content Include="tournament\templates\tournament\index.html" />
     <Content Include="user\migrations\__pycache__\0001_initial.cpython-37.pyc" />
     <Content Include="user\migrations\__pycache__\__init__.cpython-37.pyc" />
     <Content Include="user\templates\user\confirm_user_signup.html" />
-    <Content Include="user\templates\user\user_contact.html" />
     <Content Include="user\templates\user\hubs.html" />
     <Content Include="user\templates\user\settings_email.html" />
     <Content Include="user\templates\user\settings_password.html" />
@@ -258,7 +263,6 @@
     <Content Include="public\static\public\scripts\respond.min.js" />
     <None Include="public\static\public\scripts\_references.js" />
     <Content Include="public\templates\public\about.html" />
-    <Content Include="public\templates\public\contact.html" />
     <Content Include="public\templates\public\index.html" />
     <Content Include="public\templates\public\layout.html" />
     <Content Include="public\templates\public\login.html" />

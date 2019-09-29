@@ -20,8 +20,9 @@ class CustomUserChangeForm(UserChangeForm):
 class SignupForm(forms.ModelForm):
 
     class Meta:
-        model = Signup
+        model = UserSignup
         fields = ['firstname', 'surname', 'phone', 'email', 'is_staff', 'message']
+
 
 class CustomUserForm(forms.ModelForm):
 
@@ -50,15 +51,3 @@ class PasswordConfirm(forms.Form):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Current Password'}))
-
-class HubSignUpForm(forms.ModelForm):
-
-    class Meta:
-        model = HubSignUp
-        fields = ['hub_type', 'name', 'phone', 'email', 'town_city']
-
-class UserContactForm(forms.Form):
-
-    email = forms.EmailField(label="Email Address", required=True)
-    phone = forms.CharField(label="Phone Number", max_length=30, required=False)
-    message = forms.CharField(label='Message', widget=forms.Textarea(), required=False)

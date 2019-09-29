@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('confirm_user_signup/<int:signup_id>', 
          views.confirm_user_signup, name='confirm_user_signup'),
+    path('confirm_hub_signup/<int:signup_id>',
+         views.confirm_hub_signup, name='confirm_hub_signup'),
     ]

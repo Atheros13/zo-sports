@@ -16,7 +16,6 @@ urlpatterns = [
 
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
-    path('contact_success/', views.contact_success, name='contact_success'),
     path('password_reset/', views.password_reset, name='password_reset'),
     path('password_reset_request/', views.password_reset_request, name='password_reset_request'),
     path('password_reset_sent/', views.password_reset_sent, name='password_reset_sent'),   

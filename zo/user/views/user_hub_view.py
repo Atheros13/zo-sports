@@ -32,3 +32,4 @@ def hubs_main_page(request):
             'year':datetime.now().year,
         }
     )
+
