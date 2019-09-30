@@ -50,7 +50,7 @@ class HubMembership(Membership):
     the person has in the overall Hub, HubGroups indicate which groups in the Hub they belong to 
     i.e. Student is a HubMembership, Kennedy House or 12DB (a form class) are HubGroups. '''
     
-    # start_date, end_date, is_active
+    # start_date, end_date, auto_end, is_active
     type = models.ForeignKey(HubMembershipType, on_delete=models.CASCADE)
     member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='memberships')
     membership_id = models.CharField(max_length=50, blank=True)

@@ -97,8 +97,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=30, blank=True)
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_huttscience = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False) # is ZO-SPORTS staff i.e. can access /admin
+    is_authorised = models.BooleanField(default=False) # Authorised/Verified User - create Hubs/Tournaments
+    is_huttscience = models.BooleanField(default=False) # 
 
     ## OUT ATTRIBUTES
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name='custom_user')
@@ -130,6 +131,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ''' Sends an email to this User. '''
 
         send_mail(subject, message, from_email, [self.email])
+
 
 ### USER ADJACENT MODELS ###
 
