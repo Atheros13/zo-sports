@@ -31,6 +31,8 @@ class HubMember(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
 
+
+
 class HubMembershipType(models.Model):
 
     ''' A singular type of Hub membership, i.e. Student, Teacher, Staff, Parent, Club Member etc. '''
@@ -68,6 +70,7 @@ class HubMemberAddress(Address):
 
     # line1, line2, line3, town_city, postcode, country
     member = models.OneToOneField(HubMember, on_delete=models.CASCADE, related_name='address')
+
 
 
 class RankHubMembership(Membership):

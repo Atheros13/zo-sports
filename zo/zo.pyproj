@@ -31,6 +31,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="general\classes\__init__.py" />
+    <Compile Include="general\models\membership.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="general\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="hub\admin.py" />
     <Compile Include="hub\apps.py" />
     <Compile Include="hub\forms\forms.py">
@@ -163,12 +170,15 @@
     <Compile Include="zo\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="general\models\" />
+    <Folder Include="general\classes\" />
     <Folder Include="hub\" />
     <Folder Include="hub\migrations\" />
     <Folder Include="hub\models\" />
     <Folder Include="hub\forms\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
+    <Folder Include="general\" />
     <Folder Include="public\models\" />
     <Folder Include="public\general\" />
     <Folder Include="public\forms\" />
