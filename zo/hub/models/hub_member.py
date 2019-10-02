@@ -18,6 +18,7 @@ class HubMember(models.Model):
     user = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name='hub_memberships')
 
     nsn = models.CharField(max_length=30, blank=True) # national student number
+
     # >>> memberships (HubMembership)
     # >>> ranks (RankHubMembership)
     # >>> hub_groups (HubGroupMembership)

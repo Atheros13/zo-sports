@@ -6,9 +6,12 @@ from datetime import datetime
 
 class MembershipType1(models.Model):
 
-    ''' '''
+    ''' An abstract model which can be inherited to create a unique 
+    membership type for ... '''
 
+    type = None
     name = models.CharField(max_length=30)
+    super_type = models.ForeignKey('self', on_delete=models.CASCADE, related_name='sub_types')
 
     class Meta:
 
@@ -16,7 +19,7 @@ class MembershipType1(models.Model):
 
     def __str__(self):
 
-        return self.name
+        pass
 
 class MembershipPeriod(models.Model):
     
@@ -46,16 +49,13 @@ class Membership1(models.Model):
 
     ''' '''
 
-    type = models.ForeignKey(MembershipType1, null=True, on_delete=models.SET_NULL, related_name='memberships')
+    member = None
+    membership_type = None
     membership_periods = GenericRelation(MembershipPeriod)
 
     class Meta:
 
         abstract = True
-
-    def __str__(self):
-        
-        return self.type.__str__()
 
     def add(self, start_date=None, end_date=None):
 
