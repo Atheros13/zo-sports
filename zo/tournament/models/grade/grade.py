@@ -30,6 +30,10 @@ class AgeGrade(models.Model):
 		return self.__str__()	
 
 
+class RankGroupType(models.Model):
+
+    name = models.CharField(max_length=30, blank=True) # Age
+
 class RankGroup(models.Model):
 
 	''' The name of a collection of Rank objects. This provides a 
@@ -37,8 +41,8 @@ class RankGroup(models.Model):
 	can be used to provide more information about the group i.e. Age
 	can be used as the 'type' when the RankGroup is for School Year Levels. '''
 
-	type = models.CharField(max_length=30, blank=True)
-	name = models.CharField(max_length=30)
+	type = models.ForeignKey(RankGroupType, null=True, on_delete=models.SET_NULL, related_name='rank_groups')
+	name = models.CharField(max_length=30) # School Year Levels - NZ
 
 class Rank(models.Model):
 
@@ -47,8 +51,7 @@ class Rank(models.Model):
 	from lowest to highest. If this is blank, then the Ranks 
 	should be ordered alphabetically '''
 
-	rank_group = models.ForeignKey(RankGroup, on_delete=models.CASCADE,
-									related_name='rank')
+	rank_group = models.ForeignKey(RankGroup, on_delete=models.CASCADE, related_name='ranks')
 	name = models.CharField(max_length=30)
 	rank_value = models.PositiveIntegerField(blank=True)
 

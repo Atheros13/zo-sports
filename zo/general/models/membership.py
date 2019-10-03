@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from datetime import datetime
 
-class MembershipType1(models.Model):
+class MembershipType(models.Model):
 
     ''' An abstract model which can be inherited to create a unique 
     membership type for ... '''
@@ -45,12 +45,14 @@ class MembershipPeriod(models.Model):
             return name + ' - %s' % self.end_date
         return name + ' - currently'
 
-class Membership1(models.Model):
+class Membership(models.Model):
 
     ''' '''
 
-    member = None
+    MEMBER_RELATED_NAME = ''
+
     membership_type = None
+    member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name=MEMBER_RELATED_NAME)
     membership_periods = GenericRelation(MembershipPeriod)
 
     class Meta:

@@ -1,9 +1,12 @@
 from django.db import models
 from colorful.fields import RGBColorField
+from djangoyearlessdate.models import YearlessDateField
 
 from .membership import Membership
 from user.models import CustomUser
 from public.models import Address
+
+### 
 
 class HubType(models.Model):
     
@@ -16,6 +19,9 @@ class HubType(models.Model):
 class Hub(models.Model):
 
     hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL)
+    
+    #hub_year_start = YearlessDateField(null=True)
+    
     name = models.CharField(max_length=30)
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
@@ -45,6 +51,19 @@ class HubAddress(Address):
 
     hub = models.OneToOneField(Hub, on_delete=models.CASCADE, related_name='address')
 
+### ROLE ###
+
+class HubRoleType(models.Model):
+
+    pass
+
+class HubRole(models.Model):
+
+    ''' Represents the role/s that a HubMember can have in that Hub, i.e. Student, Teacher etc. '''
+
+    pass
+
+### GROUP ###
 
 class HubGroupType(models.Model):
 
@@ -74,6 +93,7 @@ class HubGroup(Membership):
     colour = RGBColorField(blank=True)
     text_colour = RGBColorField(colors=['#000000', '#ffffff'], blank=True)
 
+###
 
 class HubSignUp(models.Model):
 
