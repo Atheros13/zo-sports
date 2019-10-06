@@ -58,6 +58,7 @@ class HubMembership(Membership):
     member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='memberships')
     membership_id = models.CharField(max_length=50, blank=True)
 
+
 class HubMemberName(NameBase):
 
     ''' Inherits from NameBase and links name values to a HubMember model. '''
@@ -73,21 +74,34 @@ class HubMemberAddress(Address):
     member = models.OneToOneField(HubMember, on_delete=models.CASCADE, related_name='address')
 
 
+class HubRoleType(models.Model):
+
+    pass
+
+class HubRole(models.Model):
+
+    ''' Represents the role/s that a HubMember can have in that Hub, i.e. Student, Teacher etc. '''
+
+    pass
+
+class HubRoleHubMembership(Membership):
+
+    pass
+
 
 class RankHubMembership(Membership):
 
     ''' A timed record of membership in a Rank, i.e. if the Rank is "School Year - NZ Year 10", 
     a student is not just that Rank forever. '''
 
-    # start_date, end_date, is_active
     rank = models.ForeignKey(Rank, on_delete=models.CASCADE)
     member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='ranks')
 
-class HubGroupMembership(Membership):
+
+class HubGroupHubMembership(Membership):
 
     ''' A timed record of membership in a HubGroup, i.e. a HubGroup could be a class like 12PB, 
     a student will not be in that class forever. '''
 
-    # start_date, end_date, is_active
     hub_group = models.ForeignKey(HubGroup, on_delete=models.CASCADE)
     member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='hub_groups')

@@ -53,15 +53,6 @@ class HubAddress(Address):
 
 ### ROLE ###
 
-class HubRoleType(models.Model):
-
-    pass
-
-class HubRole(models.Model):
-
-    ''' Represents the role/s that a HubMember can have in that Hub, i.e. Student, Teacher etc. '''
-
-    pass
 
 ### GROUP ###
 
@@ -71,18 +62,20 @@ class HubGroupType(models.Model):
 
     name = models.CharField(max_length=30, unique=True)
 
-class HubGroup(Membership):
+class HubGroup(models.Model):
 
-    ''' A group within a Hub. Unlike a HubMembership, this is more internal; a House Group, 
-    a YearGroup, or even a Class i.e. 13DB. These groups can be semi-permanent, or only for a 
-    time period i.e. a Year. HubMembers can have HubGroupMembership which indicates their 
-    membership in a HubGroup i.e. a HubGroup is a House called Kennedy, which was started 01/01/74 
-    and is still active. A HubMember had HubGroupMembership to that House for the 5 years they were 
+    ''' A group within a Hub such as a House Group, a YearGroup, or even a Class i.e. 13DB. 
+    These groups can be semi-permanent, or only for a time period i.e. a Year. 
+
+    HubMembers can have HubGroupMembership which indicates their membership in a HubGroup 
+    i.e. a HubGroup is a House called Kennedy, which was started 01/01/74 and is still active. 
+    A HubMember had HubGroupMembership to that House for the 5 years they were 
     at that Hub/School. '''
 
-    # start_date, end_date, is_active, auto_end_membership
     hub = models.ForeignKey(Hub, on_delete=models.CASCADE, related_name='hub_groups')
     type = models.ForeignKey(HubGroupType, null=True, on_delete=models.SET_NULL, related_name='hub_groups')
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
 
     name = models.CharField(max_length=30) 
     description = models.TextField(blank=True, default='')

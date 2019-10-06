@@ -51,7 +51,7 @@ class Membership(models.Model):
 
     MEMBER_RELATED_NAME = ''
 
-    membership_type = None
+    membership = None
     member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name=MEMBER_RELATED_NAME)
     membership_periods = GenericRelation(MembershipPeriod)
 
@@ -64,7 +64,7 @@ class Membership(models.Model):
         ''' Creates a membership_period and links it to this Membership. If a current period 
         is still active it will renew that one instead. '''
 
-        mp = self.membership_periods.objects.order_by(-start_date)
+        mp = self.membership_periods.order_by(-start_date)
         if mp:
             if mp[0].end_date == None or mp[0].end_date < datetime.now():
                 self.renew(end_date=end_date)
@@ -82,7 +82,7 @@ class Membership(models.Model):
         or if it is greater than the current date, and False if it is less than the current date, 
         or it there are no membership_periods connected to this Membership. '''
 
-        mp = self.membership_periods.objects.order_by(-start_date)
+        mp = self.membership_periods.order_by(-start_date)
         if mp:
             if mp[0].end_date:
                 return mp[0].end_date >= datetime.now()
@@ -94,7 +94,7 @@ class Membership(models.Model):
         ''' Renews the most recent membership_period, by either changing the 
         end_date to a set date or to None. '''
 
-        mp = self.membership_periods.objects.order_by(-start_date)
+        mp = self.membership_periods.order_by(-start_date)
         if mp:
             if end_date == None or end_date > datetime.now():
                 mp[0].end_date = end_date
@@ -105,7 +105,7 @@ class Membership(models.Model):
         ''' Cancels the most recent membership_period, by either changing the 
         end_date to the current date or an earlier date. '''
 
-        mp = self.membership_periods.objects.order_by(-start_date)
+        mp = self.membership_periods.order_by(-start_date)
         if mp:
             if end_date == None or end_date > datetime.now():
                 mp[0].end_date = datetime.now()
