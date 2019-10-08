@@ -31,11 +31,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="general\classes\__init__.py" />
-    <Compile Include="general\models\membership.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="general\models\__init__.py">
+    <Compile Include="hub\models\membership.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="hub\admin.py" />
@@ -49,9 +45,6 @@
     <Compile Include="hub\migrations\__init__.py" />
     <Compile Include="hub\models\hub.py" />
     <Compile Include="hub\models\hub_member.py" />
-    <Compile Include="hub\models\membership.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="hub\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -138,7 +131,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="user\migrations\__init__.py" />
-    <Compile Include="user\models\user_base_models.py" />
+    <Compile Include="user\models\base.py" />
+    <Compile Include="user\models\custom_user.py" />
     <Compile Include="user\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -157,7 +151,6 @@
     <Compile Include="public\apps.py" />
     <Compile Include="public\forms\forms.py" />
     <Compile Include="public\migrations\__init__.py" />
-    <Compile Include="public\models\public_base_models.py" />
     <Compile Include="public\tests.py" />
     <Compile Include="public\views\views.py" />
     <Compile Include="public\__init__.py" />
@@ -170,15 +163,12 @@
     <Compile Include="zo\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="general\models\" />
-    <Folder Include="general\classes\" />
     <Folder Include="hub\" />
     <Folder Include="hub\migrations\" />
     <Folder Include="hub\models\" />
     <Folder Include="hub\forms\" />
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
-    <Folder Include="general\" />
     <Folder Include="public\models\" />
     <Folder Include="public\general\" />
     <Folder Include="public\forms\" />

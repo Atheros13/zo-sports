@@ -2,8 +2,7 @@ from django.db import models
 
 from .hub import Hub, HubGroup, HubType
 from .membership import Membership
-from public.models import Address
-from user.models import CustomUser, NameBase, Gender
+from user.models import CustomUser, Address, Name, Gender
 from tournament.models import Rank
 
 
@@ -34,15 +33,15 @@ class HubMember(models.Model):
 
 
 
-class HubMembershipType(models.Model):
+class HubRole(models.Model):
 
-    ''' A singular type of Hub membership, i.e. Student, Teacher, Staff, Parent, Club Member etc. '''
+    ''' A singular type of HubRole membership, i.e. Student, Teacher, Staff, Parent, Club Member etc. '''
 
     hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL, related_name='hub_membership_types')
     name = models.CharField(max_length=30)
     description = models.TextField(blank=True)
 
-class HubMembership(Membership):
+class HubRoleMembership(Membership):
 
     ''' Inherits from Membership and links a HubMembershipType to a HubMember,
     i.e. A HubMember may have Student type membership starting from 01/01/18 - currently, and 
@@ -53,12 +52,11 @@ class HubMembership(Membership):
     the person has in the overall Hub, HubGroups indicate which groups in the Hub they belong to 
     i.e. Student is a HubMembership, Kennedy House or 12DB (a form class) are HubGroups. '''
     
-    # start_date, end_date, auto_end, is_active
-    type = models.ForeignKey(HubMembershipType, on_delete=models.CASCADE)
-    member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='memberships')
-    membership_id = models.CharField(max_length=50, blank=True)
+    membership_type = 'HubRole'
+    membership = models.ForeignKey(HubRole, null=True, on_delete=models.SET_NULL, related_name='memberships')
 
-class HubMemberName(NameBase):
+
+class HubMemberName(Name):
 
     ''' Inherits from NameBase and links name values to a HubMember model. '''
 
@@ -79,15 +77,13 @@ class RankHubMembership(Membership):
     ''' A timed record of membership in a Rank, i.e. if the Rank is "School Year - NZ Year 10", 
     a student is not just that Rank forever. '''
 
-    # start_date, end_date, is_active
-    rank = models.ForeignKey(Rank, on_delete=models.CASCADE)
-    member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='ranks')
+    membership_type = 'Rank'
+    membership = models.ForeignKey(Rank, on_delete=models.CASCADE, related_name='hub_memberships')
 
 class HubGroupMembership(Membership):
 
     ''' A timed record of membership in a HubGroup, i.e. a HubGroup could be a class like 12PB, 
     a student will not be in that class forever. '''
 
-    # start_date, end_date, is_active
-    hub_group = models.ForeignKey(HubGroup, on_delete=models.CASCADE)
-    member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name='hub_groups')
+    membership_type = 'HubGroup'
+    membership = models.ForeignKey(HubGroup, on_delete=models.CASCADE, related_name='memberships')

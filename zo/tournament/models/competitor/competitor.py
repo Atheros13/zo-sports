@@ -7,7 +7,7 @@ from .competitor_group import *
 from hub.models import Hub, HubGroup
 from tournament.models.tournament import Tournament
 from tournament.models.grade import Rank
-from user.models import CustomUser, NameBase, Gender
+from user.models import CustomUser, Name, Gender
 
 class Competitor(models.Model):
 
@@ -42,7 +42,7 @@ class Competitor(models.Model):
             return self.team_name
         return self.name.__str__()
 
-class CompetitorName(NameBase):
+class CompetitorName(Name):
 
     ''' A NameBase inherited model, for use with a Competitor. '''
 

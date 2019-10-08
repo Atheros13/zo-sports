@@ -5,59 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.postgres.fields import ArrayField
 
-### BASE MODELS ###
+from .base import Name, Gender
 
-class Gender(models.Model):
-
-    gender = models.CharField(max_length=30, unique=True)
-
-    def __str__(self):
-        return self.gender
-
-class NameBase(models.Model):
-
-    ''' An abstract name class which can be inherited by other models. '''
-
-    firstname = models.CharField(verbose_name='First Name', max_length=50)
-    middlenames = models.CharField(verbose_name='Middle Name/s', max_length=50, 
-                                   blank=True)
-    surname = models.CharField(max_length=30)
-    
-    preferred_name = models.CharField(verbose_name='Preferred Name', max_length=50, 
-                                      blank=True, default='')
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        firstname = self.firstname
-        if self.preferred_name:
-            firstname = self.preferred_name
-        
-        return '%s %s' % (firstname, self.surname)
-
-    def name(self):
-        if self.preferred_name:
-            return self.preferred_name
-        return self.firstname
-
-    def fullname(self, preferred=True):
-
-        firstname = self.firstname
-        if preferred == True and self.preferred_firstname != '':
-            firstname = self.preferred_firstname
-
-        return '%s %s %s' % (firstname, self.middlenames, self.surname)
-
-class Name(NameBase):
-
-    ''' A NameBase inherited model, for use with a CustomUser. '''
-
-    user_name = models.OneToOneField('CustomUser', null=True, 
-                                    on_delete=models.CASCADE, related_name='name')
-    user_birth = models.OneToOneField('CustomUser', null=True, 
-                                    on_delete=models.CASCADE, related_name='birth_name')
- 
 
 ### USER MODELS ###
 
@@ -131,6 +80,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ''' Sends an email to this User. '''
 
         send_mail(subject, message, from_email, [self.email])
+
+class CustomUserName(Name):
+
+    ''' A Name inherited model, for use with a CustomUser. '''
+
+    user_name = models.OneToOneField(CustomUser, null=True, 
+                                    on_delete=models.CASCADE, related_name='name')
+    user_birth = models.OneToOneField(CustomUser, null=True, 
+                                    on_delete=models.CASCADE, related_name='birth_name')
 
 
 ### USER ADJACENT MODELS ###

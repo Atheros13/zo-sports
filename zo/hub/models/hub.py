@@ -3,8 +3,7 @@ from colorful.fields import RGBColorField
 from djangoyearlessdate.models import YearlessDateField
 
 from .membership import Membership
-from user.models import CustomUser
-from public.models import Address
+from user.models import CustomUser, Address
 
 ### 
 
