@@ -2,12 +2,13 @@ from django.db import models
 from colorful.fields import RGBColorField
 from djangoyearlessdate.models import YearlessDateField
 
-from .membership import Membership
 from user.models import CustomUser, Address
 
 ### 
 
 class HubType(models.Model):
+
+    # School - Secondary School - Coeducational Secondary School >> Gender Age Type. 
     
     type = models.CharField(max_length=30, unique=True)
     #super_type = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='sub_types')
@@ -49,41 +50,6 @@ class HubAddress(Address):
     ''' Inherits from the Address model and links to a Hub ''' 
 
     hub = models.OneToOneField(Hub, on_delete=models.CASCADE, related_name='address')
-
-### ROLE ###
-
-
-### GROUP ###
-
-class HubGroupType(models.Model):
-
-    ''' '''
-
-    name = models.CharField(max_length=30, unique=True)
-
-class HubGroup(models.Model):
-
-    ''' A group within a Hub such as a House Group, a YearGroup, or even a Class i.e. 13DB. 
-    These groups can be semi-permanent, or only for a time period i.e. a Year. 
-
-    HubMembers can have HubGroupMembership which indicates their membership in a HubGroup 
-    i.e. a HubGroup is a House called Kennedy, which was started 01/01/74 and is still active. 
-    A HubMember had HubGroupMembership to that House for the 5 years they were 
-    at that Hub/School. '''
-
-    hub = models.ForeignKey(Hub, on_delete=models.CASCADE, related_name='hub_groups')
-    type = models.ForeignKey(HubGroupType, null=True, on_delete=models.SET_NULL, related_name='hub_groups')
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
-
-    name = models.CharField(max_length=30) 
-    description = models.TextField(blank=True, default='')
-    
-    # >>> competitor_groups
-    # >>> 
-
-    colour = RGBColorField(blank=True)
-    text_colour = RGBColorField(colors=['#000000', '#ffffff'], blank=True)
 
 ###
 

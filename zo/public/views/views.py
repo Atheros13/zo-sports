@@ -6,7 +6,7 @@ from datetime import datetime
 from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from public.forms import ContactForm, EmailForm, PasswordChange
+from public.forms import GeneralContactForm, EmailForm, PasswordChange
 from user.models import CustomUser, UserSignup, PasswordReset
 
 def home(request):

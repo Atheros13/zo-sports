@@ -8,9 +8,9 @@ class MembershipPeriod(models.Model):
     
     ''' '''
 
-    CHOICES = {'pk__in':ContentType.objects.all().filter(model__endswith='membership')} 
+    #CHOICES = {'pk__in':ContentType.objects.all().filter(model__endswith='membership')} 
 
-    content_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE, limit_choices_to=CHOICES)
+    content_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE)#, limit_choices_to=CHOICES)
     object_id = models.PositiveIntegerField()
 
     membership = GenericForeignKey('content_type', 'object_id')
@@ -32,12 +32,12 @@ class Membership(models.Model):
 
     ''' '''
 
-    MEMBER_RELATED_NAME = ''
+    MEMBER_RELATED_NAME = '+'
 
-    membership_type = None #
-    membership = None # 
-    membership_id = models.CharField(max_length=50, blank=True)
-    member = models.ForeignKey(HubMember, on_delete=models.CASCADE, related_name=MEMBER_RELATED_NAME)
+    membership_type = None # String() HubRole, HubGroup, Rank
+    membership = None # FK() to a specific membership model
+    membership_id_number = models.CharField(max_length=50, blank=True)
+    member = models.ForeignKey(to="hub.HubMember", on_delete=models.CASCADE, related_name=MEMBER_RELATED_NAME)
     membership_periods = GenericRelation(MembershipPeriod)
 
     class Meta:

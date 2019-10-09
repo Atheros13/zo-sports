@@ -40,6 +40,11 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
+    ''' '''
+
+    ### IN ATTRIBUTES ###
+    # name
+
     ## OWN ATTRIBUTES
     email = models.EmailField(unique=True)
     dob = models.DateField(null=True)
@@ -52,16 +57,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     ## OUT ATTRIBUTES
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name='custom_user')
-    birth_gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name='custom_user_birth')
 
     ### MISC ###
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
-    ### IN ATTRIBUTES ###
-    # name
-    # birth_name
     
     ### META DATA ###
     class Meta:
@@ -77,6 +77,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     ### FUNCTIONS ###
     def email_user(self, subject, message, from_email='no-reply@zo-sports.com', **kwargs):
+        
         ''' Sends an email to this User. '''
 
         send_mail(subject, message, from_email, [self.email])
@@ -87,8 +88,6 @@ class CustomUserName(Name):
 
     user_name = models.OneToOneField(CustomUser, null=True, 
                                     on_delete=models.CASCADE, related_name='name')
-    user_birth = models.OneToOneField(CustomUser, null=True, 
-                                    on_delete=models.CASCADE, related_name='birth_name')
 
 
 ### USER ADJACENT MODELS ###
