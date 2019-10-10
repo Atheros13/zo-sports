@@ -7,8 +7,15 @@ from public.forms import GeneralContactForm, TechnicalContactForm, UserSignUpCon
 
 from public.general.classes import ContactFormChoice
 
-def contact(request):
+def signup(request):
     assert isinstance(request, HttpRequest)
+
+    page_description = ['''At the moment, ZO-SPORTS is restricting sign ups to authorised sign ups only. 
+    This means that each sign up request will be checked by one of the ZO-SPORTS team, and manually 
+    accepted or declined (so there will be up to a 24 hour delay). 
+    We plan to restrict these initial sign ups to Teachers, Sports/Club Administrators, and other organisation staff 
+    that will be resonsible for creating and running the Hubs and Tournaments.''',
+    '''If you also need to request the creation of a new Hub, choose the 'Sign Up & Hub' option.''']
 
     choices = [GeneralContactForm, TechnicalContactForm]
 
@@ -40,9 +47,10 @@ def contact(request):
         'public/contact.html',
         {
             'layout': 'public/layout.html',
-            'title':'Contact',
+            'title':'Authorised Sign Up Request ',
             'choices': choices, 'form':form,
             'year':datetime.now().year,
             'error_message': error_message,
+            'page_description': page_description,
         }
     )

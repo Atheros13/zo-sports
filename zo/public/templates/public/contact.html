@@ -3,7 +3,11 @@
 {% block content %}
 
     <h2>{{ title }}</h2>
-    <p></p>
+    <p>
+        {% for p in page_description %}
+            {{p}} <br/>
+        {% endfor %}
+    </p>
 
     <div class="row page-content">
         <div class="col-md-4">

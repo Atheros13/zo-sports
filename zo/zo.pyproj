@@ -63,6 +63,7 @@
     <Compile Include="public\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="public\views\public_signup_view.py" />
     <Compile Include="public\views\public_contact_view.py" />
     <Compile Include="public\views\__init__.py">
       <SubType>Code</SubType>
