@@ -10,8 +10,6 @@ from hub.models import Hub
 from user.forms import HubSignUpContactForm
 from public.forms import GeneralContactForm, TechnicalContactForm
 
-from public.general.classes import ContactFormChoice
-
 def password_check(user):
     ''' Check if the user has a TemporaryPassword reference, indicating that that
     the user needs to change their password. '''

@@ -3,13 +3,14 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, BadHeaderError
 
+from hub.models import Hub
 from user.models import CustomUser, UserSignup
 
 
 class UserSignUpContactForm(forms.ModelForm):
 
     title = 'Sign Up'
-    description = ''
+    description = 'Click to sign up as an authenticated user.'
 
     class Meta:
         model = UserSignup
@@ -32,6 +33,31 @@ class UserSignUpContactForm(forms.ModelForm):
 
         return True
 
+class HubUserSignUpContactForm(forms.ModelForm):
+
+    title = 'Sign Up & Hub'
+    description = '''Click to sign up as an authenticated user, 
+                    and to also request the creation of a new Hub.'''
+
+    hub_name = forms.CharField(label='Hub Name', max_length=30, required=True)
+    hub_phone = forms.CharField(label='Hub Phone Number', max_length=30)
+    hub_address = forms.CharField(label='Hub Street Address', max_length=30)
+    hub_towncity = forms.CharField(label='Hub Town/City', max_length=30)
+    user_firstname = forms.CharField(label='User Firstname', max_length=30)
+    user_surname = forms.CharField(label='User Surname', max_length=30)
+    user_phone = forms.CharField(label='User Phone Number', max_length=30)
+    user_email = forms.EmailField(label='User Email')
+    message = forms.CharField(label='Message', widget=forms.Textarea())
+
+    class Meta():
+        model = Hub
+        fields = ['hub_type', 'hub_name', 'hub_phone', 'hub_address', 'hub_towncity',
+                  'user_firstname', 'user_surname', 'user_phone', 'user_email',
+                  'message']
+
+    def process_contact(self, *args, **kwargs):
+
+        print(True)
 
 class GeneralContactForm(forms.Form):
 

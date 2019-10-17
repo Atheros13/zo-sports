@@ -3,9 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth import update_session_auth_hash
 
-from public.forms import GeneralContactForm, TechnicalContactForm, UserSignUpContactForm
-
-from public.general.classes import ContactFormChoice
+from public.forms import GeneralContactForm, TechnicalContactForm
 
 def contact(request):
     assert isinstance(request, HttpRequest)
@@ -24,6 +22,7 @@ def contact(request):
             elif request.POST.get(c.title):
                 contact_form = c(request.POST)
                 if contact_form.is_valid():
+                    #contact_form.process_contact()
                     return render(
                         request,
                         'public/message.html',

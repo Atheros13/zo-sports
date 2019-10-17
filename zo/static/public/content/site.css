@@ -41,3 +41,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.btn-contact {
+    width: 100%;
+}

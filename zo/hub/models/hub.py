@@ -18,7 +18,7 @@ class HubType(models.Model):
 
 class Hub(models.Model):
 
-    hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL)
+    hub_type = models.ForeignKey(HubType, verbose_name='Hub Type', null=True, on_delete=models.SET_NULL)
     
     #hub_year_start = YearlessDateField(null=True)
     
