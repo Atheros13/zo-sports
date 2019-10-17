@@ -7,7 +7,6 @@ from django.contrib.postgres.fields import ArrayField
 
 from .base import Name, Gender
 
-
 ### USER MODELS ###
 
 class CustomUserManager(BaseUserManager):
@@ -89,6 +88,16 @@ class CustomUserName(Name):
     user_name = models.OneToOneField(CustomUser, null=True, 
                                     on_delete=models.CASCADE, related_name='name')
 
+###
+
+class NSN(models.Model):
+
+    number = models.CharField(max_length=20)
+    #user = models.OneToOneField(CustomUser, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+
+        return self.number
 
 ### USER ADJACENT MODELS ###
 

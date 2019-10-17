@@ -3,7 +3,7 @@ from colorful.fields import RGBColorField
 
 from .hub import Hub, HubType
 from .membership import Membership
-from user.models import CustomUser, Address, Name, Gender
+from user.models import CustomUser, NSN, Address, Name, Gender
 
 
 class HubMember(models.Model):
@@ -16,13 +16,13 @@ class HubMember(models.Model):
     hub = models.ForeignKey(Hub, on_delete=models.CASCADE, related_name='members')
     user = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name='hub_memberships')
 
-    nsn = models.CharField(max_length=30, blank=True) # national student number
+    nsn = models.ForeignKey(NSN, null=True, on_delete=models.SET_NULL, related_name='hub_members') # national student number
 
     # >>> hub_roles (HubRoleMembership)
     # >>> ranks (RankHubMembership)
     # >>> hub_groups (HubGroupMembership)
 
-    # >>> tournament_competitors (Competitor)
+    # >>> tournaments_as_competitor (Competitor)
 
     # >>> name (HubMemberName)
     dob = models.DateField(null=True)

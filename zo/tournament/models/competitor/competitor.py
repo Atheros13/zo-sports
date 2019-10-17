@@ -28,10 +28,10 @@ class Competitor(models.Model):
     hub_groups = models.ManyToManyField(HubGroup, related_name='competitors')
     hub_member = models.ForeignKey(to="hub.HubMember", null=True,
                                    on_delete=models.SET_NULL,
-                                   related_name='competitor_tournaments')
+                                   related_name='tournaments_as_competitor')
     custom_user = models.ForeignKey(CustomUser, null=True,
                                     on_delete=models.SET_NULL,
-                                    related_name='competitor_tournaments')
+                                    related_name='tournaments_as_competitor')
 
     is_team = models.BooleanField(default=False)
     team_name = models.CharField(max_length=30, blank=True)

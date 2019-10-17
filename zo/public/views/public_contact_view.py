@@ -12,7 +12,7 @@ def contact(request):
 
     choices = [GeneralContactForm, TechnicalContactForm]
 
-    form = choices[0]
+    form = None
     user = request.user
     error_message = ''
 

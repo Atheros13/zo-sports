@@ -47,7 +47,7 @@ def signup(request):
         'public/contact.html',
         {
             'layout': 'public/layout.html',
-            'title':'Authorised Sign Up Request ',
+            'title':'Sign Up',
             'choices': choices, 'form':form,
             'year':datetime.now().year,
             'error_message': error_message,
