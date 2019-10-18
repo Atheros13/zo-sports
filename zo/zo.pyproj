@@ -58,9 +58,6 @@
     <Compile Include="public\forms\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="public\general\classes.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="public\models\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -172,7 +169,6 @@
     <Folder Include="hub\templates\" />
     <Folder Include="hub\templates\hub\" />
     <Folder Include="public\models\" />
-    <Folder Include="public\general\" />
     <Folder Include="public\forms\" />
     <Folder Include="public\views\" />
     <Folder Include="tournament\" />

@@ -15,13 +15,13 @@
             {% for c in choices %}
             <hr />
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <form actions="." method="post">
                         {% csrf_token %}
                         <input type="submit" name="Choice {{c.title}}" value="{{c.title}}" class="btn btn-default btn-contact" />
                     </form>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <p>{{c.description}}</p>
                 </div>
             </div>

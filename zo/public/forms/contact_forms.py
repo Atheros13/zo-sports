@@ -1,11 +1,9 @@
-
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, BadHeaderError
 
 from hub.models import Hub
 from user.models import CustomUser, UserSignup
-
 
 class UserSignUpContactForm(forms.ModelForm):
 
@@ -57,13 +55,14 @@ class HubUserSignUpContactForm(forms.ModelForm):
 
     def process_contact(self, *args, **kwargs):
 
-        print(True)
+        return True
 
 class GeneralContactForm(forms.Form):
 
     title = 'General'
     description = 'Click to send a general message'
 
+    name = forms.CharField(label='Name', max_length=30, required=True)
     email = forms.EmailField(label="Email Address", required=True)
     phone = forms.CharField(label="Phone Number", max_length=30, required=False)
     message = forms.CharField(label='Message', widget=forms.Textarea(), required=True)
@@ -80,12 +79,14 @@ class GeneralContactForm(forms.Form):
         
         subject = '%s Contact' % self.title
 
-        message = ''
+        message = 'Name: %s\n' % f['name']
         if f['phone']:
             message += 'Phone: %s\n\n' % f['phone']
         message += f['message']
         
         send_mail(subject, message, email, ['info@zo-sports.com'])
+
+        return True
 
 class TechnicalContactForm(GeneralContactForm):
 
