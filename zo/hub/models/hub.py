@@ -6,12 +6,19 @@ from user.models import CustomUser, Address
 
 ### 
 
+class HubGenderType(models.Model):
+
+    name = models.CharField(max_length=30)
+    #gender = 
+
 class HubType(models.Model):
 
-    # School - Secondary School - Coeducational Secondary School >> Gender Age Type. 
+    CHOICES = [('School', 'School'), ('Club', 'Club'), ('Organisation', 'Organisation')]
     
-    type = models.CharField(max_length=30, unique=True)
-    #super_type = models.ForeignKey('self', null=True, on_delete=models.CASCADE, related_name='sub_types')
+    type = models.CharField(max_length=30, choices=CHOICES)
+
+    gender_type = models.ForeignKey(HubGenderType, null=True, on_delete=models.SET_NULL, related_name='hub_types')
+    grade_type = models.CharField(max_length=30)
 
     def __str__(self):
         return self.type
