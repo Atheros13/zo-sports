@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.postgres.fields import ArrayField
 
+from hub.models import HubType
 from .base import Name, Gender
 
 ### USER MODELS ###
@@ -107,6 +108,7 @@ class TemporaryPassword(models.Model):
     is_temp = models.BooleanField(default=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    
 class UserSignup(models.Model):
 
     firstname = models.CharField(max_length=30)

@@ -25,7 +25,7 @@ def contact_view(request, title, choices, layout, page_description):
             elif request.POST.get(c.title):
                 contact_form = c(request.POST)
                 if contact_form.is_valid():
-                    check = contact_form.process_contact()
+                    check, error_message = contact_form.process_contact()
                     if check:
                         return render(
                             request,
@@ -37,8 +37,6 @@ def contact_view(request, title, choices, layout, page_description):
                                 'year': datetime.now().year,
                                 }
                             )
-                    else:
-                        error_message = check
                 else:
                     error_message = ''
 

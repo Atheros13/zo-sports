@@ -2,8 +2,6 @@ from django.db import models
 from colorful.fields import RGBColorField
 from djangoyearlessdate.models import YearlessDateField
 
-from user.models import CustomUser, Address
-
 ### 
 
 class HubGenderType(models.Model):
@@ -33,10 +31,10 @@ class Hub(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
     
-    main_contact = models.ForeignKey(CustomUser, related_name='hub_main_contact', 
+    main_contact = models.ForeignKey(to="user.CustomUser", related_name='hub_main_contact', 
                                      on_delete=models.SET_NULL, null=True)
     
-    permission_admin = models.ManyToManyField(CustomUser, related_name='hub_admin')
+    permission_admin = models.ManyToManyField(to="user.CustomUser", related_name='hub_admin')
     is_public = models.BooleanField(default=False)
 
     class Meta:
@@ -69,3 +67,16 @@ class HubSignUp(models.Model):
     town_city = models.CharField(verbose_name='Town/City', max_length=30)
     
     requester = models.ForeignKey(CustomUser, null=True, on_delete=models.CASCADE)
+
+class HubUserSignup(models.Model):
+
+    hub_type = models.ForeignKey(HubType, null=True, on_delete=models.SET_NULL)
+    hub_name = models.CharField(max_length=30)
+    hub_address = models.CharField(max_length=30)
+    hub_towncity = models.CharField(max_length=30)
+    firstname = models.CharField(max_length=30)
+    surname = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.TextField(blank=True)
+    is_staff = models.BooleanField(default=False)

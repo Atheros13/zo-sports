@@ -12,8 +12,8 @@ urlpatterns = [
     path('hubs/', views.hubs_main_page, name='user_hubs'),
     path('contact/', views.contact, name='user_contact'),
 
-    path('confirm_user_signup/<int:signup_id>', 
-         views.confirm_user_signup, name='confirm_user_signup'),
-    path('confirm_hub_signup/<int:signup_id>',
+    path('confirm_signup/', 
+         views.confirm_signup, name='confirm_signup'),
+    path('confirm_hub_signup',
          views.confirm_hub_signup, name='confirm_hub_signup'),
     ]

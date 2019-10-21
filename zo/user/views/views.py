@@ -227,14 +227,14 @@ def settings_email(request):
 
 ### CONFIRM USER SIGNUP ###
 
-def confirm_user_signup_check(user):
+def confirm_signup_check(user):
     
     ''' Checks if the user is zo-sports staff
     '''
     return user.is_staff
 @login_required(login_url='/login/', redirect_field_name=None)
-@user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
-def confirm_user_signup(request, signup_id):
+@user_passes_test(confirm_signup_check, login_url='/', redirect_field_name=None)
+def confirm_signup(request, signup_id):
 
     assert isinstance(request, HttpRequest)
 
@@ -253,7 +253,7 @@ def confirm_user_signup(request, signup_id):
             signup = signup_list[0]
             return render(
                 request,
-                'user/confirm_user_signup.html',
+                'user/confirm_signup.html',
                 {
                     'title':'Signup', 'year':datetime.now().year,
                     'form': SignupForm(instance=signup),
@@ -280,7 +280,7 @@ def confirm_user_signup(request, signup_id):
 
         return render(
             request,
-            'user/confirm_user_signup.html',
+            'user/confirm_signup.html',
             {
                 'title':'Signup', 'year':datetime.now().year,
                 'form': form,
@@ -293,7 +293,7 @@ def confirm_user_signup(request, signup_id):
             signup = signup_list[0]
             return render(
                 request,
-                'user/confirm_user_signup.html',
+                'user/confirm_signup.html',
                 {
                     'title':'Signup', 'year':datetime.now().year,
                     'form': SignupForm(instance=signup),
@@ -314,7 +314,7 @@ def confirm_user_signup(request, signup_id):
 ### CONFIRM HUB SIGNUP ###
 
 @login_required(login_url='/login/', redirect_field_name=None)
-@user_passes_test(confirm_user_signup_check, login_url='/', redirect_field_name=None)
+@user_passes_test(confirm_signup_check, login_url='/', redirect_field_name=None)
 def confirm_hub_signup(request, signup_id):
 
     pass
